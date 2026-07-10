@@ -245,78 +245,32 @@
   .hero-cta:hover{ transform:translateY(-2px); box-shadow:0 12px 26px rgba(232,89,12,0.36); background:#cf4c09; }
   .hero-cta svg{ width:16px; height:16px; }
 
-  /* ---------- Category showcase ---------- */
-  .categories{
-    max-width:1220px;
-    margin:-56px auto 0;
-    padding:0 24px;
-    position:relative;
-    z-index:2;
+  /* ---------- Breadcrumb ---------- */
+  .breadcrumb{
+    max-width:1220px; margin:0 auto; padding:16px 24px 0;
+    font-size:13px; color:var(--steel); display:flex; align-items:center; gap:6px; flex-wrap:wrap;
   }
-  .cat-grid{
-    display:grid;
-    grid-template-columns:repeat(5, 1fr);
-    gap:12px;
-  }
-  .cat-tile{
-    background:var(--white);
-    border:1px solid var(--line);
-    border-top:4px solid var(--tile-color, var(--steel));
-    border-radius:var(--r-md);
-    padding:18px 16px;
-    cursor:pointer;
-    text-align:left;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-    font-family:inherit;
-    box-shadow:var(--shadow-soft);
-  }
-  .cat-tile:hover{ transform:translateY(-3px); box-shadow:var(--shadow-hover); }
-  .cat-tile.active{ background:var(--charcoal); border-color:var(--charcoal); }
-  .cat-tile.active .cat-name{ color:#fff; }
-  .cat-tile.active .cat-count{ color:var(--steel-light); }
-  .cat-icon{
-    width:36px; height:36px;
-    border-radius:10px;
-    background:var(--tile-bg, var(--paper-2));
-    display:flex; align-items:center; justify-content:center;
-    color:var(--tile-color, var(--steel));
-  }
-  .cat-tile.active .cat-icon{ background:rgba(255,255,255,0.12); color:var(--yellow); }
-  .cat-icon svg{ width:20px; height:20px; }
-  .cat-name{
-    font-size:13px;
-    font-weight:600;
-    line-height:1.3;
-    color:var(--ink);
-  }
-  .cat-count{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    color:var(--steel);
-  }
+  .breadcrumb a{ color:var(--steel); text-decoration:none; }
+  .breadcrumb a:hover{ color:var(--orange); }
+  .breadcrumb .sep{ color:var(--line); }
+  .breadcrumb .current{ color:var(--ink); font-weight:500; }
 
-  /* ---------- Catalog section ---------- */
-  .catalog{ max-width:1220px; margin:0 auto; padding:56px 24px 90px; }
-  .catalog-head{
-    display:flex; justify-content:space-between; align-items:flex-end;
-    gap:24px; flex-wrap:wrap; margin-bottom:26px;
-  }
+  /* ---------- Catalog section (store layout) ---------- */
+  .catalog{ max-width:1220px; margin:0 auto; padding:22px 24px 90px; }
+  .catalog-head{ margin-bottom:22px; }
   .catalog-head h2{ font-size:30px; font-weight:600; }
-  .catalog-head p{ color:var(--steel); font-size:14px; margin-top:6px; max-width:52ch; }
+  .catalog-head p{ color:var(--steel); font-size:14px; margin-top:6px; max-width:60ch; }
 
-  .search-bar{ position:relative; margin-bottom:22px; }
+  .search-bar{ position:relative; margin-bottom:24px; }
   .search-bar input{
     width:100%;
     padding:17px 52px 17px 22px;
     font-size:16px;
     font-family:'IBM Plex Sans', sans-serif;
-    border:2px solid var(--line);
+    border:1.5px solid var(--line);
     background:#fff;
     color:var(--ink);
-    border-radius:var(--r-pill);
+    border-radius:var(--r-md);
     transition:border-color .15s ease, box-shadow .15s ease;
   }
   .search-bar input:focus{
@@ -329,27 +283,63 @@
     width:20px; height:20px; color:var(--steel); pointer-events:none;
   }
 
-  .results-meta{
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
-    margin:4px 0 20px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px; color:var(--steel); letter-spacing:0.03em;
+  .store-layout{ display:grid; grid-template-columns:250px 1fr; gap:34px; align-items:start; }
+
+  /* --- Sidebar --- */
+  .sidebar{
+    background:#fff; border:1px solid var(--line); border-radius:var(--r-md);
+    padding:6px; position:sticky; top:88px;
   }
-  .results-meta button{
-    background:var(--paper-2); border:none; color:var(--orange);
-    font-family:'IBM Plex Mono', monospace; font-size:12px;
-    cursor:pointer; padding:7px 14px; border-radius:var(--r-pill); font-weight:600;
-    transition:background .15s ease;
+  .sidebar-title{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:0.06em;
+    color:var(--steel); text-transform:uppercase; padding:14px 14px 8px;
   }
-  .results-meta button:hover{ background:#e9e5d8; }
-  .active-filter{
+  .cat-list{ list-style:none; margin:0; padding:0 6px 8px; }
+  .cat-list li{ margin-bottom:2px; }
+  .cat-list button{
+    width:100%; display:flex; align-items:center; gap:10px;
+    background:none; border:none; text-align:left; cursor:pointer;
+    padding:10px 10px; border-radius:var(--r-sm); font-family:inherit;
+    font-size:13.5px; color:var(--ink); transition:background .15s ease;
+  }
+  .cat-list button:hover{ background:var(--paper-2); }
+  .cat-list button.active{ background:var(--tile-bg, var(--paper-2)); color:var(--tile-color, var(--ink)); font-weight:600; }
+  .cat-list .dot{ width:9px; height:9px; border-radius:50%; background:var(--tile-color, var(--steel-light)); flex-shrink:0; }
+  .cat-list .lbl{ flex:1; line-height:1.3; }
+  .cat-list .cnt{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--steel-light); }
+  .cat-list button.active .cnt{ color:inherit; opacity:0.7; }
+
+  /* --- Toolbar (count + sort + per-page) --- */
+  .toolbar{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    margin-bottom:18px; padding-bottom:16px; border-bottom:1px solid var(--line);
+  }
+  .toolbar-count{ font-size:13.5px; color:var(--steel); }
+  .toolbar-count .active-filter{
     display:inline-flex; align-items:center; gap:6px;
     background:var(--charcoal); color:var(--yellow);
-    padding:5px 12px; font-size:11.5px; margin-left:10px; border-radius:var(--r-pill);
+    padding:5px 12px; font-size:11.5px; margin-left:8px; border-radius:var(--r-pill);
   }
-  .active-filter button{ color:var(--yellow); background:none; border:none; cursor:pointer; font-size:13px; line-height:1; padding:0;}
+  .toolbar-count .active-filter button{ color:var(--yellow); background:none; border:none; cursor:pointer; font-size:13px; line-height:1; padding:0;}
+  .toolbar-controls{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .toolbar-controls label{ font-size:12.5px; color:var(--steel); font-family:'IBM Plex Mono', monospace; }
+  .toolbar select{
+    font-family:'IBM Plex Sans', sans-serif; font-size:13.5px; color:var(--ink);
+    background:#fff; border:1.5px solid var(--line); border-radius:var(--r-sm);
+    padding:9px 32px 9px 12px; cursor:pointer; appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B626C' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 10px center; background-size:15px;
+  }
+  .toolbar select:focus{ outline:none; border-color:var(--orange); }
+  .clear-btn{
+    background:var(--paper-2); border:none; color:var(--orange);
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    cursor:pointer; padding:9px 14px; border-radius:var(--r-pill); font-weight:600;
+    transition:background .15s ease;
+  }
+  .clear-btn:hover{ background:#e9e5d8; }
 
-  .grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:18px; }
+  .grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; }
   .card{
     background:#fff;
     border:1px solid var(--line);
@@ -358,43 +348,59 @@
     display:flex;
     flex-direction:column;
     transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-    box-shadow:var(--shadow-soft);
   }
   .card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-hover); border-color:var(--card-color, var(--line)); }
   .card-image{
-    height:128px;
+    height:120px;
     background:var(--card-bg, var(--paper-2));
     display:flex;
     align-items:center;
     justify-content:center;
     position:relative;
   }
-  .card-image svg{ width:60px; height:60px; color:var(--card-color, var(--steel)); }
+  .card-image svg{ width:54px; height:54px; color:var(--card-color, var(--steel)); }
   .card-image .tag{
     position:absolute;
-    top:10px; left:10px;
+    top:9px; left:9px;
     font-family:'IBM Plex Mono', monospace;
-    font-size:9.5px;
-    letter-spacing:0.04em;
+    font-size:9px;
+    letter-spacing:0.03em;
     color:var(--card-color, var(--steel));
-    background:rgba(255,255,255,0.75);
+    background:rgba(255,255,255,0.8);
     padding:3px 8px;
     border-radius:var(--r-pill);
     text-transform:uppercase;
   }
-  .card-body{ padding:16px 16px 18px; display:flex; flex-direction:column; gap:10px; flex:1; }
-  .card .name{ font-size:14px; font-weight:500; line-height:1.35; flex:1; }
+  .card-body{ padding:14px 14px 16px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .card .name{ font-size:13.5px; font-weight:500; line-height:1.35; flex:1; min-height:36px; }
   .card .name mark{ background:var(--yellow); color:var(--charcoal); padding:0 1px; border-radius:2px; }
+  .card .brand-badge{ font-size:10px; color:var(--steel-light); letter-spacing:0.03em; font-weight:600; }
   .card .price-row{
     display:flex; justify-content:space-between; align-items:baseline;
-    border-top:1px dashed var(--line); padding-top:10px;
+    padding-top:10px; border-top:1px dashed var(--line);
   }
-  .card .price{ font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:20px; color:var(--charcoal); }
-  .card .price .cur{ font-size:12px; color:var(--steel); margin-right:3px; }
-  .card .brand-badge{ font-size:10.5px; color:var(--steel-light); letter-spacing:0.04em; font-weight:600; }
+  .card .price{ font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:19px; color:var(--charcoal); }
+  .card .price .cur{ font-size:11.5px; color:var(--steel); margin-right:3px; }
+  .card .quote-btn{
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    width:100%; margin-top:2px; padding:9px 10px;
+    background:var(--charcoal); color:#fff; border:none; border-radius:var(--r-sm);
+    font-size:12.5px; font-weight:600; letter-spacing:0.01em; cursor:pointer;
+    text-decoration:none; transition:background .15s ease;
+  }
+  .card .quote-btn:hover{ background:var(--orange); }
+  .card .quote-btn svg{ width:14px; height:14px; }
 
   .empty-state{ grid-column:1/-1; text-align:center; padding:70px 20px; color:var(--steel); }
   .empty-state .big{ font-family:'Oswald', sans-serif; font-size:22px; color:var(--ink); margin-bottom:8px; }
+
+  /* --- Mobile category chips (shown instead of sidebar on small screens) --- */
+  .mobile-cats{ display:none; gap:8px; overflow-x:auto; padding-bottom:6px; margin-bottom:18px; }
+  .mobile-cats button{
+    flex-shrink:0; white-space:nowrap; font-size:12.5px; font-family:inherit; cursor:pointer;
+    padding:9px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:#fff; color:var(--ink);
+  }
+  .mobile-cats button.active{ background:var(--charcoal); border-color:var(--charcoal); color:#fff; }
 
   /* ---------- Pagination ---------- */
   .pagination{
@@ -454,18 +460,22 @@
   /* ---------- Responsive ---------- */
   @media (max-width:1000px){
     .hero-inner{ grid-template-columns:1fr; }
-    .cat-grid{ grid-template-columns:repeat(3,1fr); }
-    .grid{ grid-template-columns:repeat(2,1fr); }
+    .grid{ grid-template-columns:repeat(3,1fr); }
     .about-inner, .contact{ grid-template-columns:1fr; }
     nav ul{ display:none; }
+    .store-layout{ grid-template-columns:1fr; }
+    .sidebar{ display:none; }
+    .mobile-cats{ display:flex; }
+  }
+  @media (max-width:700px){
+    .grid{ grid-template-columns:repeat(2,1fr); }
   }
   @media (max-width:560px){
-    .cat-grid{ grid-template-columns:repeat(2,1fr); }
     .grid{ grid-template-columns:1fr; }
-    .hero{ padding:44px 18px 84px; border-radius:0 0 24px 24px; }
-    .categories{ margin-top:-36px; }
+    .hero{ padding:44px 18px 60px; border-radius:0 0 24px 24px; }
     .hero-stats{ flex-wrap:wrap; }
     .hero-stats div{ flex:1 1 45%; border-right:none; padding-right:0; margin-bottom:14px; }
+    .toolbar{ flex-direction:column; align-items:flex-start; }
   }
 </style>
 </head>
@@ -510,16 +520,16 @@
   </div>
 </section>
 
-<section class="categories" aria-label="Categorías de productos">
-  <div class="cat-grid" id="catGrid"></div>
-</section>
-
 <main>
+  <div class="breadcrumb">
+    <a href="#inicio">Inicio</a><span class="sep">/</span><span class="current">Equipos de Protección Personal (EPP)</span>
+  </div>
+
   <section class="catalog" id="catalogo">
     <div class="catalog-head">
       <div>
         <h2>Catálogo de productos</h2>
-        <p>Busca por nombre de producto o elige una categoría arriba. Todos los precios están expresados en soles (S/).</p>
+        <p>Filtra por categoría, busca por nombre y ordena por precio. Todos los precios están expresados en soles (S/).</p>
       </div>
     </div>
 
@@ -528,13 +538,40 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
     </div>
 
-    <div class="results-meta">
-      <span id="resultsCount"></span>
-      <button id="clearBtn" type="button">Limpiar filtros</button>
-    </div>
+    <div class="mobile-cats" id="mobileCats"></div>
 
-    <div class="grid" id="productGrid"></div>
-    <div class="pagination" id="pagination"></div>
+    <div class="store-layout">
+      <aside class="sidebar">
+        <div class="sidebar-title">Categorías</div>
+        <ul class="cat-list" id="catList"></ul>
+      </aside>
+
+      <div class="store-content">
+        <div class="toolbar">
+          <div class="toolbar-count" id="resultsCount"></div>
+          <div class="toolbar-controls">
+            <label for="sortSelect">Ordenar por</label>
+            <select id="sortSelect">
+              <option value="relevancia">Relevancia</option>
+              <option value="precio-asc">Precio: menor a mayor</option>
+              <option value="precio-desc">Precio: mayor a menor</option>
+              <option value="nombre-asc">Nombre A-Z</option>
+            </select>
+            <label for="perPageSelect">Mostrar</label>
+            <select id="perPageSelect">
+              <option value="16">16</option>
+              <option value="24">24</option>
+              <option value="36">36</option>
+              <option value="66">Todos</option>
+            </select>
+            <button id="clearBtn" class="clear-btn" type="button">Limpiar filtros</button>
+          </div>
+        </div>
+
+        <div class="grid" id="productGrid"></div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
   </section>
 
   <section class="about" id="nosotros">
@@ -732,14 +769,20 @@ function getProductVisual(p){
 }
 
 const grid = document.getElementById('productGrid');
-const catGrid = document.getElementById('catGrid');
+const catList = document.getElementById('catList');
+const mobileCats = document.getElementById('mobileCats');
 const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const perPageSelect = document.getElementById('perPageSelect');
 const resultsCount = document.getElementById('resultsCount');
 const clearBtn = document.getElementById('clearBtn');
 const paginationEl = document.getElementById('pagination');
 
-const PAGE_SIZE = 16;
+const WHATSAPP_NUMBER = '51962377295';
+
+let PAGE_SIZE = 16;
 let currentPage = 1;
+let sortMode = 'relevancia';
 
 const categoryCounts = PRODUCTS.reduce((acc,p) => { acc[p.categoria] = (acc[p.categoria]||0)+1; return acc; }, {});
 const categories = Object.keys(categoryCounts).sort((a,b) => categoryCounts[b]-categoryCounts[a]);
@@ -748,24 +791,38 @@ let activeCategory = null;
 let query = '';
 
 function renderCatTiles(){
-  const tiles = [
-    `<button class="cat-tile ${activeCategory===null?'active':''}" style="--tile-color:var(--orange);--tile-bg:#FCE3D6" data-cat="">
-      <span class="cat-icon">${iconSvg('tool')}</span>
-      <span class="cat-name">Todos los productos</span>
-      <span class="cat-count">${PRODUCTS.length} artículos</span>
-    </button>`
+  const rows = [
+    `<li><button class="${activeCategory===null?'active':''}" style="--tile-color:var(--orange);--tile-bg:#FCE3D6" data-cat="">
+      <span class="dot"></span><span class="lbl">Todos los productos</span><span class="cnt">${PRODUCTS.length}</span>
+    </button></li>`
   ];
   categories.forEach(cat => {
     const meta = CATEGORY_META[cat] || CATEGORY_META['Otros'];
-    tiles.push(`
-      <button class="cat-tile ${activeCategory===cat?'active':''}" style="--tile-color:${meta.color};--tile-bg:${meta.bg}" data-cat="${encodeURIComponent(cat)}">
-        <span class="cat-icon">${iconSvg(meta.icon)}</span>
-        <span class="cat-name">${cat}</span>
-        <span class="cat-count">${categoryCounts[cat]} artículos</span>
-      </button>`);
+    rows.push(`
+      <li><button class="${activeCategory===cat?'active':''}" style="--tile-color:${meta.color};--tile-bg:${meta.bg}" data-cat="${encodeURIComponent(cat)}">
+        <span class="dot"></span><span class="lbl">${cat}</span><span class="cnt">${categoryCounts[cat]}</span>
+      </button></li>`);
   });
-  catGrid.innerHTML = tiles.join('');
-  catGrid.querySelectorAll('.cat-tile').forEach(btn => {
+  catList.innerHTML = rows.join('');
+  catList.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = decodeURIComponent(btn.dataset.cat);
+      activeCategory = cat === '' ? null : cat;
+      currentPage = 1;
+      renderCatTiles();
+      renderMobileCats();
+      renderGrid();
+    });
+  });
+
+  const chips = [
+    `<button class="${activeCategory===null?'active':''}" data-cat="">Todos</button>`
+  ];
+  categories.forEach(cat => {
+    chips.push(`<button class="${activeCategory===cat?'active':''}" data-cat="${encodeURIComponent(cat)}">${cat}</button>`);
+  });
+  mobileCats.innerHTML = chips.join('');
+  mobileCats.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', () => {
       const cat = decodeURIComponent(btn.dataset.cat);
       activeCategory = cat === '' ? null : cat;
@@ -775,6 +832,7 @@ function renderCatTiles(){
     });
   });
 }
+function renderMobileCats(){ /* chips are rebuilt inside renderCatTiles */ }
 
 function escapeHtml(str){
   return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -796,11 +854,16 @@ function formatPrice(n){
 
 function getFiltered(){
   const q = query.trim();
-  return PRODUCTS.filter(p => {
+  const list = PRODUCTS.filter(p => {
     const matchesCat = !activeCategory || p.categoria === activeCategory;
     const matchesQuery = !q || p.producto.toUpperCase().includes(q.toUpperCase());
     return matchesCat && matchesQuery;
   });
+  const sorted = list.slice();
+  if(sortMode === 'precio-asc') sorted.sort((a,b) => a.precio - b.precio);
+  else if(sortMode === 'precio-desc') sorted.sort((a,b) => b.precio - a.precio);
+  else if(sortMode === 'nombre-asc') sorted.sort((a,b) => a.producto.trim().localeCompare(b.producto.trim(), 'es'));
+  return sorted;
 }
 
 function renderPagination(totalItems){
@@ -859,6 +922,7 @@ function renderGrid(){
     const brandMatch = p.producto.match(/(TRUPER|PRETUL)\s*$/i);
     const brand = brandMatch ? brandMatch[1].toUpperCase() : '';
     const visual = getProductVisual(p);
+    const waText = encodeURIComponent(`Hola, quisiera cotizar: ${p.producto.trim()}`);
     return `
     <article class="card" style="--card-color:${visual.color};--card-bg:${visual.bg}">
       <div class="card-image">
@@ -867,10 +931,14 @@ function renderGrid(){
       </div>
       <div class="card-body">
         <div class="name">${highlight(p.producto.trim(), q)}</div>
+        <div class="brand-badge">${brand}</div>
         <div class="price-row">
           <span class="price"><span class="cur">S/</span>${formatPrice(p.precio)}</span>
-          <span class="brand-badge">${brand}</span>
         </div>
+        <a class="quote-btn" href="https://wa.me/${WHATSAPP_NUMBER}?text=${waText}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Cotizar por WhatsApp
+        </a>
       </div>
     </article>`;
   }).join('');
@@ -879,8 +947,11 @@ function renderGrid(){
 }
 
 searchInput.addEventListener('input', (e) => { query = e.target.value; currentPage = 1; renderGrid(); });
+sortSelect.addEventListener('change', (e) => { sortMode = e.target.value; currentPage = 1; renderGrid(); });
+perPageSelect.addEventListener('change', (e) => { PAGE_SIZE = parseInt(e.target.value, 10); currentPage = 1; renderGrid(); });
 clearBtn.addEventListener('click', () => {
-  query = ''; activeCategory = null; currentPage = 1; searchInput.value = '';
+  query = ''; activeCategory = null; currentPage = 1; sortMode = 'relevancia'; PAGE_SIZE = 16;
+  searchInput.value = ''; sortSelect.value = 'relevancia'; perPageSelect.value = '16';
   renderCatTiles(); renderGrid();
 });
 
