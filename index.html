@@ -387,6 +387,26 @@
   .card .price .cur{ font-size:12px; color:var(--steel); margin-right:3px; }
   .card .brand-badge{ font-size:10.5px; color:var(--steel-light); letter-spacing:0.04em; font-weight:600; }
 
+  .pagination{
+    display:flex; align-items:center; justify-content:center;
+    gap:6px; margin-top:36px; flex-wrap:wrap;
+  }
+  .pagination button{
+    min-width:38px; height:38px;
+    padding:0 10px;
+    border:1px solid var(--line);
+    background:var(--white);
+    color:var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .pagination button:hover:not(:disabled):not(.active){ border-color:var(--card-color, var(--orange)); color:var(--orange); }
+  .pagination button.active{ background:var(--charcoal); border-color:var(--charcoal); color:var(--yellow); cursor:default; }
+  .pagination button:disabled{ opacity:0.35; cursor:not-allowed; }
+  .pagination .dots{ padding:0 4px; color:var(--steel-light); font-family:'IBM Plex Mono', monospace; font-size:13px; }
+
   .empty-state{ grid-column:1/-1; text-align:center; padding:70px 20px; color:var(--steel); }
   .empty-state .big{ font-family:'Oswald', sans-serif; font-size:22px; color:var(--ink); margin-bottom:8px; }
 
@@ -506,6 +526,7 @@
     </div>
 
     <div class="grid" id="productGrid"></div>
+    <div class="pagination" id="pagination"></div>
   </section>
 
   <section class="about" id="nosotros">
@@ -614,6 +635,9 @@ const categories = Object.keys(categoryCounts).sort((a,b) => categoryCounts[b]-c
 
 let activeCategory = null;
 let query = '';
+let currentPage = 1;
+const PAGE_SIZE = 12;
+const pagination = document.getElementById('pagination');
 
 function renderCatTiles(){
   const tiles = [
@@ -637,6 +661,7 @@ function renderCatTiles(){
     btn.addEventListener('click', () => {
       const cat = decodeURIComponent(btn.dataset.cat);
       activeCategory = cat === '' ? null : cat;
+      currentPage = 1;
       renderCatTiles();
       renderGrid();
     });
@@ -669,6 +694,10 @@ function renderGrid(){
     return matchesCat && matchesQuery;
   });
 
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  if(currentPage > totalPages) currentPage = totalPages;
+  if(currentPage < 1) currentPage = 1;
+
   let metaHtml = `${filtered.length} producto${filtered.length === 1 ? '' : 's'} encontrado${filtered.length === 1 ? '' : 's'}`;
   if(activeCategory){
     metaHtml += `<span class="active-filter">${escapeHtml(activeCategory)}<button aria-label="Quitar filtro de categoría" id="removeCatFilter">✕</button></span>`;
@@ -676,7 +705,7 @@ function renderGrid(){
   resultsCount.innerHTML = metaHtml;
   const removeBtn = document.getElementById('removeCatFilter');
   if(removeBtn){
-    removeBtn.addEventListener('click', () => { activeCategory = null; renderCatTiles(); renderGrid(); });
+    removeBtn.addEventListener('click', () => { activeCategory = null; currentPage = 1; renderCatTiles(); renderGrid(); });
   }
 
   if(filtered.length === 0){
@@ -684,10 +713,14 @@ function renderGrid(){
       <div class="big">Sin resultados</div>
       <p>No encontramos productos que coincidan con "${escapeHtml(q)}". Prueba con otro término o quita el filtro de categoría.</p>
     </div>`;
+    pagination.innerHTML = '';
     return;
   }
 
-  grid.innerHTML = filtered.map(p => {
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = filtered.slice(start, start + PAGE_SIZE);
+
+  grid.innerHTML = pageItems.map(p => {
     const brandMatch = p.producto.match(/(TRUPER|PRETUL)\s*$/i);
     const brand = brandMatch ? brandMatch[1].toUpperCase() : '';
     const meta = CATEGORY_META[p.categoria] || CATEGORY_META['Otros'];
@@ -706,11 +739,47 @@ function renderGrid(){
       </div>
     </article>`;
   }).join('');
+
+  renderPagination(totalPages);
 }
 
-searchInput.addEventListener('input', (e) => { query = e.target.value; renderGrid(); });
+function renderPagination(totalPages){
+  if(totalPages <= 1){ pagination.innerHTML = ''; return; }
+
+  const pages = [];
+  const add = (n) => pages.push(n);
+  add(1);
+  for(let i = currentPage - 1; i <= currentPage + 1; i++){ if(i > 1 && i < totalPages) add(i); }
+  add(totalPages);
+  const uniqueSorted = [...new Set(pages)].sort((a,b) => a - b);
+
+  let html = `<button id="prevPage" ${currentPage === 1 ? 'disabled' : ''} aria-label="Página anterior">‹</button>`;
+  let prev = 0;
+  uniqueSorted.forEach(n => {
+    if(n - prev > 1) html += `<span class="dots">…</span>`;
+    html += `<button data-page="${n}" class="${n === currentPage ? 'active' : ''}">${n}</button>`;
+    prev = n;
+  });
+  html += `<button id="nextPage" ${currentPage === totalPages ? 'disabled' : ''} aria-label="Página siguiente">›</button>`;
+
+  pagination.innerHTML = html;
+
+  pagination.querySelectorAll('button[data-page]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentPage = parseInt(btn.dataset.page, 10);
+      renderGrid();
+      document.getElementById('catalogo').scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+  const prevBtn = document.getElementById('prevPage');
+  const nextBtn = document.getElementById('nextPage');
+  if(prevBtn) prevBtn.addEventListener('click', () => { currentPage--; renderGrid(); document.getElementById('catalogo').scrollIntoView({behavior:'smooth', block:'start'}); });
+  if(nextBtn) nextBtn.addEventListener('click', () => { currentPage++; renderGrid(); document.getElementById('catalogo').scrollIntoView({behavior:'smooth', block:'start'}); });
+}
+
+searchInput.addEventListener('input', (e) => { query = e.target.value; currentPage = 1; renderGrid(); });
 clearBtn.addEventListener('click', () => {
-  query = ''; activeCategory = null; searchInput.value = '';
+  query = ''; activeCategory = null; currentPage = 1; searchInput.value = '';
   renderCatTiles(); renderGrid();
 });
 
