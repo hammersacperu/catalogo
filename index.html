@@ -10,16 +10,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --charcoal:#1E5B62;
-    --charcoal-2:#276B72;
-    --steel:#5B7A80;
-    --steel-light:#A9C2C4;
-    --paper:#FBF6EC;
-    --paper-2:#F3ECDC;
-    --ink:#243B3D;
-    --yellow:#F5B942;
-    --orange:#FF6B4A;
-    --line:#E6DCC6;
+    --charcoal:#1D4E8F;
+    --charcoal-2:#2C5FA8;
+    --steel:#5B6B80;
+    --steel-light:#AEB9CC;
+    --paper:#FFFFFF;
+    --paper-2:#F2F4F8;
+    --ink:#1A2233;
+    --yellow:#FFC72C;
+    --orange:#E31E24;
+    --line:#E2E6ED;
     --white:#FFFFFF;
 
     --c-guantes:#E8590C;      --c-guantes-bg:#FCE8DB;
@@ -65,23 +65,36 @@
 
   /* ---------- Hazard stripe ---------- */
   .hazard{
-    height:10px;
+    height:5px;
     width:100%;
-    background:repeating-linear-gradient(
-      -45deg,
-      var(--yellow) 0px, var(--yellow) 22px,
-      var(--charcoal) 22px, var(--charcoal) 44px
-    );
+    background:var(--orange);
   }
-  .hazard.thin{ height:6px; }
+  .hazard.thin{ height:4px; background:var(--charcoal); }
+
+  .brand-ribbon{
+    position:relative;
+    height:54px;
+    overflow:hidden;
+  }
+  .brand-ribbon .rb-red{
+    position:absolute; inset:0;
+    background:var(--orange);
+    clip-path:polygon(0 0, 72% 0, 56% 100%, 0 100%);
+  }
+  .brand-ribbon .rb-navy{
+    position:absolute; inset:0;
+    background:var(--charcoal);
+    clip-path:polygon(56% 100%, 72% 0, 100% 0, 100% 100%);
+  }
 
   /* ---------- Header ---------- */
   header{
-    background:var(--charcoal);
-    color:var(--paper);
+    background:#fff;
+    color:var(--ink);
     position:sticky;
     top:0;
     z-index:50;
+    border-bottom:1px solid var(--line);
   }
   .nav-wrap{
     display:flex;
@@ -89,16 +102,14 @@
     justify-content:space-between;
     max-width:1220px;
     margin:0 auto;
-    padding:18px 24px;
+    padding:16px 24px;
   }
   .brand{ display:flex; align-items:center; gap:10px; }
   .brand-logo-wrap{
-    background:#fff;
-    padding:6px 12px;
     display:flex;
     align-items:center;
   }
-  .brand-logo{ height:32px; width:auto; display:block; }
+  .brand-logo{ height:38px; width:auto; display:block; }
   .brand .mark{
     background:var(--yellow);
     color:var(--charcoal);
@@ -124,9 +135,9 @@
   nav a{
     text-decoration:none;
     font-size:14px;
-    font-weight:500;
-    color:var(--paper);
-    letter-spacing:0.03em;
+    font-weight:600;
+    color:var(--ink);
+    letter-spacing:0.02em;
     position:relative;
     padding-bottom:4px;
   }
@@ -135,38 +146,36 @@
     position:absolute;
     left:0; bottom:0;
     width:0; height:2px;
-    background:var(--yellow);
+    background:var(--orange);
     transition:width .2s ease;
   }
   nav a:hover::after{ width:100%; }
 
   /* ---------- Hero ---------- */
   .hero{
-    background:var(--charcoal);
-    color:var(--paper);
-    padding:72px 24px 120px;
+    background:var(--paper);
+    color:var(--ink);
+    padding:56px 24px 64px;
     position:relative;
     overflow:hidden;
-    clip-path:polygon(0 0, 100% 0, 100% 88%, 0 100%);
   }
   .hero::before{
+    /* pegboard-wall texture, a nod to the hardware-store tool wall */
     content:"";
     position:absolute;
     inset:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
-    background-size:42px 42px;
-    mask-image:radial-gradient(ellipse 80% 60% at 70% 20%, black 40%, transparent 90%);
+    background-image: radial-gradient(rgba(29,78,143,0.14) 2.2px, transparent 2.4px);
+    background-size:26px 26px;
+    mask-image:radial-gradient(ellipse 65% 60% at 78% 10%, black 30%, transparent 85%);
     pointer-events:none;
   }
   .hero::after{
     content:"";
     position:absolute;
-    top:-120px; right:-120px;
-    width:420px; height:420px;
+    top:-110px; right:-90px;
+    width:400px; height:400px;
     border-radius:50%;
-    background:radial-gradient(circle, rgba(245,185,66,0.20), transparent 70%);
+    background:radial-gradient(circle, rgba(227,30,36,0.14), transparent 70%);
     pointer-events:none;
   }
   .hero-inner{
@@ -175,16 +184,16 @@
     position:relative;
     z-index:1;
     display:grid;
-    grid-template-columns:1.35fr 0.85fr;
-    gap:48px;
-    align-items:end;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    align-items:center;
   }
   .eyebrow{
     display:inline-flex;
     align-items:center;
     gap:8px;
     font-family:'IBM Plex Mono', monospace;
-    color:var(--yellow);
+    color:var(--orange);
     font-size:13px;
     letter-spacing:0.14em;
     margin-bottom:20px;
@@ -192,13 +201,13 @@
   .eyebrow::before{
     content:"";
     width:22px; height:2px;
-    background:var(--yellow);
+    background:var(--orange);
   }
   .hero h1{
-    font-size:clamp(40px, 5.6vw, 72px);
-    line-height:0.98;
+    font-size:clamp(38px, 5.2vw, 66px);
+    line-height:1.0;
     font-weight:700;
-    color:#fff;
+    color:var(--charcoal);
   }
   .hero h1 .hl{
     background:var(--yellow);
@@ -209,22 +218,26 @@
     -webkit-box-decoration-break:clone;
   }
   .hero p.lead{
-    margin-top:24px;
+    margin-top:22px;
     font-size:17px;
     line-height:1.65;
-    color:#C9CBCF;
-    max-width:48ch;
+    color:var(--steel);
+    max-width:46ch;
   }
-  .hero-stats{ display:flex; border-top:1px solid rgba(255,255,255,0.18); margin-top:8px;}
-  .hero-stats div{ flex:1; padding:20px 18px 0 0; border-right:1px solid rgba(255,255,255,0.18); }
-  .hero-stats div:last-child{ border-right:none; padding-right:0;}
-  .hero-stats .num{ font-family:'Oswald', sans-serif; font-size:36px; font-weight:600; color:var(--yellow); }
-  .hero-stats .label{ font-size:11.5px; color:var(--steel-light); letter-spacing:0.05em; margin-top:4px; }
+  .hero-trust{
+    display:flex; flex-wrap:wrap; gap:16px 22px;
+    margin-top:22px;
+  }
+  .hero-trust span{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:12.5px; font-weight:500; color:var(--charcoal-2);
+  }
+  .hero-trust svg{ width:15px; height:15px; color:var(--orange); flex-shrink:0; }
   .hero-cta{
     display:inline-flex;
     align-items:center;
     gap:10px;
-    margin-top:32px;
+    margin-top:30px;
     background:var(--orange);
     color:#fff;
     text-decoration:none;
@@ -234,16 +247,72 @@
     padding:15px 24px;
     border:none;
     cursor:pointer;
-    box-shadow:5px 5px 0 rgba(245,185,66,0.4);
+    box-shadow:5px 5px 0 rgba(29,78,143,0.18);
     transition:transform .15s ease, box-shadow .15s ease;
   }
-  .hero-cta:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 rgba(245,185,66,0.45); background:#E5522F; }
+  .hero-cta:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 rgba(29,78,143,0.22); background:#B8151A; }
   .hero-cta svg{ width:16px; height:16px; }
+
+  /* ---------- Hero photo corkboard ---------- */
+  .hero-photos{ position:relative; min-height:360px; }
+  .p-card{
+    position:absolute;
+    background:#fff;
+    border-radius:4px;
+    box-shadow:0 16px 28px rgba(30,45,48,0.16);
+    padding:16px;
+    width:170px; height:170px;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .p-card:hover{ transform:translateY(-6px) rotate(0deg) !important; box-shadow:0 22px 34px rgba(30,45,48,0.22); z-index:9; }
+  .p-card img{ max-width:100%; max-height:100%; object-fit:contain; mix-blend-mode:multiply; }
+  .p-card .tag{
+    position:absolute; bottom:-11px; left:14px;
+    background:var(--tag-color, var(--orange)); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:10px; font-weight:600;
+    letter-spacing:0.05em; text-transform:uppercase;
+    padding:4px 10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.18);
+  }
+  .p-card.c1{ top:2%;  left:6%;  transform:rotate(-6deg); z-index:2; }
+  .p-card.c2{ top:6%;  left:46%; transform:rotate(5deg);  z-index:3; }
+  .p-card.c3{ top:52%; left:0%;  transform:rotate(6deg);  z-index:1; }
+  .p-card.c4{ top:48%; left:44%; transform:rotate(-5deg); z-index:4; }
+  .hero-badge{
+    position:absolute; top:-6px; right:8%;
+    background:var(--charcoal); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:600;
+    letter-spacing:0.03em;
+    padding:9px 15px; border-radius:20px;
+    box-shadow:0 10px 18px rgba(30,45,48,0.28);
+    display:flex; align-items:center; gap:6px;
+    z-index:5;
+  }
+  .hero-badge svg{ width:14px; height:14px; color:var(--yellow); }
+
+  /* ---------- Hero stats bar ---------- */
+  .hero-stats-bar{
+    max-width:1220px;
+    margin:36px auto 0;
+    padding:0 24px;
+    position:relative; z-index:1;
+  }
+  .hero-stats{
+    display:flex;
+    background:#fff;
+    border:1px solid var(--line);
+    box-shadow:0 10px 24px rgba(30,45,48,0.06);
+  }
+  .hero-stats div{ flex:1; padding:20px 18px; border-right:1px solid var(--line); }
+  .hero-stats div:last-child{ border-right:none; }
+  .hero-stats .num{ font-family:'Oswald', sans-serif; font-size:32px; font-weight:600; color:var(--orange); }
+  .hero-stats .label{ font-size:11.5px; color:var(--steel); letter-spacing:0.05em; margin-top:4px; }
 
   /* ---------- Category showcase (signature bento) ---------- */
   .categories{
     max-width:1220px;
-    margin:-64px auto 0;
+    margin:44px auto 0;
     padding:0 24px;
     position:relative;
     z-index:2;
@@ -446,6 +515,7 @@
   /* ---------- Responsive ---------- */
   @media (max-width:1000px){
     .hero-inner{ grid-template-columns:1fr; }
+    .hero-photos{ min-height:300px; margin-top:36px; max-width:460px; }
     .cat-grid{ grid-template-columns:repeat(3,1fr); }
     .grid{ grid-template-columns:repeat(2,1fr); }
     .about-inner, .contact{ grid-template-columns:1fr; }
@@ -454,8 +524,10 @@
   @media (max-width:560px){
     .cat-grid{ grid-template-columns:repeat(2,1fr); }
     .grid{ grid-template-columns:1fr; }
-    .hero{ padding:48px 18px 90px; clip-path:polygon(0 0,100% 0,100% 94%,0 100%); }
-    .categories{ margin-top:-40px; }
+    .hero{ padding:44px 18px 56px; }
+    .hero-photos{ min-height:260px; }
+    .p-card{ width:130px; height:130px; padding:10px; }
+    .categories{ margin-top:32px; }
     .hero-stats{ flex-wrap:wrap; }
     .hero-stats div{ flex:1 1 45%; border-right:none; padding-right:0; margin-bottom:14px; }
   }
@@ -481,7 +553,7 @@
     </nav>
   </div>
 </header>
-<div class="hazard"></div>
+<div class="brand-ribbon"><div class="rb-red"></div><div class="rb-navy"></div></div>
 
 <section class="hero" id="inicio">
   <div class="hero-inner">
@@ -489,11 +561,28 @@
       <div class="eyebrow">EPP · EQUIPOS DE PROTECCIÓN PERSONAL</div>
       <h1>Equipamos<br><span class="hl">tu seguridad</span>,<br>obra a obra.</h1>
       <p class="lead">GRUPO HAMMER SAC distribuye equipos de protección personal para la industria, construcción y minería. Cascos, guantes, lentes, arneses y más — con precios claros en soles y stock permanente.</p>
+      <div class="hero-trust">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Proveedor habilitado por el Estado</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Homologados por Bureau Veritas</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Socios de la Cámara de Comercio de Lima</span>
+      </div>
       <a href="#catalogo" class="hero-cta">
         Ver catálogo completo
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
+    <div class="hero-photos">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+        Stock real y disponible
+      </div>
+      <div class="p-card c1"><img src="imagenes/imagen1.jpg" alt="Casco de seguridad Truper"><span class="tag" style="--tag-color:var(--c-cascos)">Cascos</span></div>
+      <div class="p-card c2"><img src="imagenes/imagen4.jpg" alt="Guantes de carnaza Truper"><span class="tag" style="--tag-color:var(--c-guantes)">Guantes</span></div>
+      <div class="p-card c3"><img src="imagenes/imagen3.jpg" alt="Chaleco de seguridad reflectivo"><span class="tag" style="--tag-color:var(--c-chalecos)">Chalecos</span></div>
+      <div class="p-card c4"><img src="imagenes/imagen15.jpg" alt="Lentes de seguridad"><span class="tag" style="--tag-color:var(--c-lentes)">Lentes</span></div>
+    </div>
+  </div>
+  <div class="hero-stats-bar">
     <div class="hero-stats">
       <div><div class="num">66</div><div class="label">PRODUCTOS EN CATÁLOGO</div></div>
       <div><div class="num">9</div><div class="label">CATEGORÍAS DE EPP</div></div>
