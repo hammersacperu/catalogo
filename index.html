@@ -10,16 +10,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --charcoal:#14171A;
-    --charcoal-2:#1F2328;
-    --steel:#5B626C;
-    --steel-light:#9096A0;
-    --paper:#FAF9F5;
-    --paper-2:#F1EFE7;
-    --ink:#14171A;
-    --yellow:#FFC300;
-    --orange:#E8590C;
-    --line:#E4E1D6;
+    --charcoal:#1E5B62;
+    --charcoal-2:#276B72;
+    --steel:#5B7A80;
+    --steel-light:#A9C2C4;
+    --paper:#FBF6EC;
+    --paper-2:#F3ECDC;
+    --ink:#243B3D;
+    --yellow:#F5B942;
+    --orange:#FF6B4A;
+    --line:#E6DCC6;
     --white:#FFFFFF;
 
     --c-guantes:#E8590C;      --c-guantes-bg:#FCE8DB;
@@ -32,13 +32,6 @@
     --c-imperm:#1B7FA3;       --c-imperm-bg:#DBEBF2;
     --c-auditiva:#B23A6E;     --c-auditiva-bg:#F4DFE8;
     --c-otros:#5B626C;        --c-otros-bg:#E7E8EA;
-
-    --r-lg:22px;
-    --r-md:16px;
-    --r-sm:11px;
-    --r-pill:999px;
-    --shadow-soft:0 10px 26px rgba(20,23,26,0.07);
-    --shadow-hover:0 16px 34px rgba(20,23,26,0.12);
   }
 
   *{box-sizing:border-box;}
@@ -72,7 +65,7 @@
 
   /* ---------- Hazard stripe ---------- */
   .hazard{
-    height:8px;
+    height:10px;
     width:100%;
     background:repeating-linear-gradient(
       -45deg,
@@ -80,7 +73,7 @@
       var(--charcoal) 22px, var(--charcoal) 44px
     );
   }
-  .hazard.thin{ height:5px; }
+  .hazard.thin{ height:6px; }
 
   /* ---------- Header ---------- */
   header{
@@ -96,7 +89,7 @@
     justify-content:space-between;
     max-width:1220px;
     margin:0 auto;
-    padding:16px 24px;
+    padding:18px 24px;
   }
   .brand{ display:flex; align-items:center; gap:10px; }
   .brand-logo-wrap{
@@ -104,7 +97,6 @@
     padding:6px 12px;
     display:flex;
     align-items:center;
-    border-radius:var(--r-sm);
   }
   .brand-logo{ height:32px; width:auto; display:block; }
   .brand .mark{
@@ -115,7 +107,6 @@
     font-size:20px;
     padding:4px 8px;
     line-height:1;
-    border-radius:6px;
   }
   .brand .name{
     font-family:'Oswald', sans-serif;
@@ -129,27 +120,34 @@
     color:var(--steel-light);
     letter-spacing:0.08em;
   }
-  nav ul{ list-style:none; display:flex; gap:8px; margin:0; padding:0; }
+  nav ul{ list-style:none; display:flex; gap:28px; margin:0; padding:0; }
   nav a{
     text-decoration:none;
     font-size:14px;
     font-weight:500;
     color:var(--paper);
-    letter-spacing:0.02em;
-    padding:9px 14px;
-    border-radius:var(--r-pill);
-    transition:background .15s ease, color .15s ease;
+    letter-spacing:0.03em;
+    position:relative;
+    padding-bottom:4px;
   }
-  nav a:hover{ background:rgba(255,255,255,0.1); color:var(--yellow); }
+  nav a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:0; height:2px;
+    background:var(--yellow);
+    transition:width .2s ease;
+  }
+  nav a:hover::after{ width:100%; }
 
   /* ---------- Hero ---------- */
   .hero{
     background:var(--charcoal);
     color:var(--paper);
-    padding:64px 24px 104px;
+    padding:72px 24px 120px;
     position:relative;
     overflow:hidden;
-    border-radius:0 0 32px 32px;
+    clip-path:polygon(0 0, 100% 0, 100% 88%, 0 100%);
   }
   .hero::before{
     content:"";
@@ -168,7 +166,7 @@
     top:-120px; right:-120px;
     width:420px; height:420px;
     border-radius:50%;
-    background:radial-gradient(circle, rgba(255,195,0,0.16), transparent 70%);
+    background:radial-gradient(circle, rgba(245,185,66,0.20), transparent 70%);
     pointer-events:none;
   }
   .hero-inner{
@@ -195,11 +193,10 @@
     content:"";
     width:22px; height:2px;
     background:var(--yellow);
-    border-radius:2px;
   }
   .hero h1{
-    font-size:clamp(38px, 5.4vw, 68px);
-    line-height:1.02;
+    font-size:clamp(40px, 5.6vw, 72px);
+    line-height:0.98;
     font-weight:700;
     color:#fff;
   }
@@ -208,232 +205,200 @@
     color:var(--charcoal);
     padding:0 10px;
     display:inline-block;
-    border-radius:8px;
     box-decoration-break:clone;
     -webkit-box-decoration-break:clone;
   }
   .hero p.lead{
-    margin-top:22px;
+    margin-top:24px;
     font-size:17px;
     line-height:1.65;
     color:#C9CBCF;
     max-width:48ch;
   }
-  .hero-stats{ display:flex; border-top:1px solid #333940; margin-top:8px;}
-  .hero-stats div{ flex:1; padding:20px 18px 0 0; border-right:1px solid #333940; }
+  .hero-stats{ display:flex; border-top:1px solid rgba(255,255,255,0.18); margin-top:8px;}
+  .hero-stats div{ flex:1; padding:20px 18px 0 0; border-right:1px solid rgba(255,255,255,0.18); }
   .hero-stats div:last-child{ border-right:none; padding-right:0;}
-  .hero-stats .num{ font-family:'Oswald', sans-serif; font-size:34px; font-weight:600; color:var(--yellow); }
+  .hero-stats .num{ font-family:'Oswald', sans-serif; font-size:36px; font-weight:600; color:var(--yellow); }
   .hero-stats .label{ font-size:11.5px; color:var(--steel-light); letter-spacing:0.05em; margin-top:4px; }
   .hero-cta{
     display:inline-flex;
     align-items:center;
     gap:10px;
-    margin-top:30px;
+    margin-top:32px;
     background:var(--orange);
     color:#fff;
     text-decoration:none;
     font-weight:600;
     font-size:14px;
-    letter-spacing:0.03em;
-    padding:15px 26px;
+    letter-spacing:0.04em;
+    padding:15px 24px;
     border:none;
     cursor:pointer;
-    border-radius:var(--r-pill);
-    box-shadow:0 8px 20px rgba(232,89,12,0.28);
-    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    box-shadow:5px 5px 0 rgba(245,185,66,0.4);
+    transition:transform .15s ease, box-shadow .15s ease;
   }
-  .hero-cta:hover{ transform:translateY(-2px); box-shadow:0 12px 26px rgba(232,89,12,0.36); background:#cf4c09; }
+  .hero-cta:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 rgba(245,185,66,0.45); background:#E5522F; }
   .hero-cta svg{ width:16px; height:16px; }
 
-  /* ---------- Breadcrumb ---------- */
-  .breadcrumb{
-    max-width:1220px; margin:0 auto; padding:16px 24px 0;
-    font-size:13px; color:var(--steel); display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+  /* ---------- Category showcase (signature bento) ---------- */
+  .categories{
+    max-width:1220px;
+    margin:-64px auto 0;
+    padding:0 24px;
+    position:relative;
+    z-index:2;
   }
-  .breadcrumb a{ color:var(--steel); text-decoration:none; }
-  .breadcrumb a:hover{ color:var(--orange); }
-  .breadcrumb .sep{ color:var(--line); }
-  .breadcrumb .current{ color:var(--ink); font-weight:500; }
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:12px;
+  }
+  .cat-tile{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-top:4px solid var(--tile-color, var(--steel));
+    padding:18px 16px;
+    cursor:pointer;
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    transition:transform .15s ease, box-shadow .15s ease;
+    font-family:inherit;
+  }
+  .cat-tile:hover{ transform:translateY(-3px); box-shadow:0 8px 18px rgba(20,23,26,0.08); }
+  .cat-tile.active{ background:var(--charcoal); border-color:var(--charcoal); }
+  .cat-tile.active .cat-name{ color:#fff; }
+  .cat-tile.active .cat-count{ color:var(--steel-light); }
+  .cat-icon{
+    width:34px; height:34px;
+    border-radius:8px;
+    background:var(--tile-bg, var(--paper-2));
+    display:flex; align-items:center; justify-content:center;
+    color:var(--tile-color, var(--steel));
+  }
+  .cat-tile.active .cat-icon{ background:rgba(255,255,255,0.12); color:var(--yellow); }
+  .cat-icon svg{ width:19px; height:19px; }
+  .cat-name{
+    font-size:13px;
+    font-weight:600;
+    line-height:1.3;
+    color:var(--ink);
+  }
+  .cat-count{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--steel);
+  }
 
-  /* ---------- Catalog section (store layout) ---------- */
-  .catalog{ max-width:1220px; margin:0 auto; padding:22px 24px 90px; }
-  .catalog-head{ margin-bottom:22px; }
-  .catalog-head h2{ font-size:30px; font-weight:600; }
-  .catalog-head p{ color:var(--steel); font-size:14px; margin-top:6px; max-width:60ch; }
+  /* ---------- Catalog section ---------- */
+  .catalog{ max-width:1220px; margin:0 auto; padding:56px 24px 90px; }
+  .catalog-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:24px; flex-wrap:wrap; margin-bottom:26px;
+  }
+  .catalog-head h2{ font-size:32px; font-weight:600; }
+  .catalog-head p{ color:var(--steel); font-size:14px; margin-top:6px; max-width:52ch; }
 
-  .search-bar{ position:relative; margin-bottom:24px; }
+  .search-bar{ position:relative; margin-bottom:22px; }
   .search-bar input{
     width:100%;
-    padding:17px 52px 17px 22px;
-    font-size:16px;
+    padding:18px 52px 18px 20px;
+    font-size:17px;
     font-family:'IBM Plex Sans', sans-serif;
-    border:1.5px solid var(--line);
+    border:2px solid var(--charcoal);
     background:#fff;
     color:var(--ink);
-    border-radius:var(--r-md);
-    transition:border-color .15s ease, box-shadow .15s ease;
   }
   .search-bar input:focus{
     outline:none;
     border-color:var(--orange);
-    box-shadow:0 0 0 4px rgba(232,89,12,0.12);
+    box-shadow:0 0 0 3px rgba(232,89,12,0.15);
   }
   .search-bar svg{
-    position:absolute; right:20px; top:50%; transform:translateY(-50%);
+    position:absolute; right:18px; top:50%; transform:translateY(-50%);
     width:20px; height:20px; color:var(--steel); pointer-events:none;
   }
 
-  .store-layout{ display:grid; grid-template-columns:250px 1fr; gap:34px; align-items:start; }
-
-  /* --- Sidebar --- */
-  .sidebar{
-    background:#fff; border:1px solid var(--line); border-radius:var(--r-md);
-    padding:6px; position:sticky; top:88px;
+  .results-meta{
+    display:flex; justify-content:space-between; align-items:center;
+    margin:4px 0 18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; color:var(--steel); letter-spacing:0.03em;
   }
-  .sidebar-title{
-    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:0.06em;
-    color:var(--steel); text-transform:uppercase; padding:14px 14px 8px;
+  .results-meta button{
+    background:none; border:none; color:var(--orange);
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px;
+    cursor:pointer; text-decoration:underline; padding:0;
   }
-  .cat-list{ list-style:none; margin:0; padding:0 6px 8px; }
-  .cat-list li{ margin-bottom:2px; }
-  .cat-list button{
-    width:100%; display:flex; align-items:center; gap:10px;
-    background:none; border:none; text-align:left; cursor:pointer;
-    padding:10px 10px; border-radius:var(--r-sm); font-family:inherit;
-    font-size:13.5px; color:var(--ink); transition:background .15s ease;
-  }
-  .cat-list button:hover{ background:var(--paper-2); }
-  .cat-list button.active{ background:var(--tile-bg, var(--paper-2)); color:var(--tile-color, var(--ink)); font-weight:600; }
-  .cat-list .dot{ width:9px; height:9px; border-radius:50%; background:var(--tile-color, var(--steel-light)); flex-shrink:0; }
-  .cat-list .lbl{ flex:1; line-height:1.3; }
-  .cat-list .cnt{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--steel-light); }
-  .cat-list button.active .cnt{ color:inherit; opacity:0.7; }
-
-  /* --- Toolbar (count + sort + per-page) --- */
-  .toolbar{
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
-    margin-bottom:18px; padding-bottom:16px; border-bottom:1px solid var(--line);
-  }
-  .toolbar-count{ font-size:13.5px; color:var(--steel); }
-  .toolbar-count .active-filter{
+  .active-filter{
     display:inline-flex; align-items:center; gap:6px;
     background:var(--charcoal); color:var(--yellow);
-    padding:5px 12px; font-size:11.5px; margin-left:8px; border-radius:var(--r-pill);
+    padding:4px 10px; font-size:11.5px; margin-left:10px;
   }
-  .toolbar-count .active-filter button{ color:var(--yellow); background:none; border:none; cursor:pointer; font-size:13px; line-height:1; padding:0;}
-  .toolbar-controls{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-  .toolbar-controls label{ font-size:12.5px; color:var(--steel); font-family:'IBM Plex Mono', monospace; }
-  .toolbar select{
-    font-family:'IBM Plex Sans', sans-serif; font-size:13.5px; color:var(--ink);
-    background:#fff; border:1.5px solid var(--line); border-radius:var(--r-sm);
-    padding:9px 32px 9px 12px; cursor:pointer; appearance:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B626C' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat:no-repeat; background-position:right 10px center; background-size:15px;
-  }
-  .toolbar select:focus{ outline:none; border-color:var(--orange); }
-  .clear-btn{
-    background:var(--paper-2); border:none; color:var(--orange);
-    font-family:'IBM Plex Mono', monospace; font-size:12px;
-    cursor:pointer; padding:9px 14px; border-radius:var(--r-pill); font-weight:600;
-    transition:background .15s ease;
-  }
-  .clear-btn:hover{ background:#e9e5d8; }
+  .active-filter button{ color:var(--yellow); background:none; border:none; cursor:pointer; font-size:13px; line-height:1; padding:0;}
 
-  .grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; }
+  .grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; }
   .card{
     background:#fff;
     border:1px solid var(--line);
-    border-radius:var(--r-md);
-    overflow:hidden;
+    border-top:4px solid var(--card-color, var(--steel));
+    padding:20px 18px 18px;
     display:flex;
     flex-direction:column;
-    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    gap:12px;
+    min-height:170px;
+    transition:border-color .15s ease, transform .15s ease, box-shadow .15s ease;
   }
-  .card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-hover); border-color:var(--card-color, var(--line)); }
-  .card-image{
-    height:120px;
+  .card:hover{ transform:translateY(-3px); box-shadow:0 10px 22px rgba(20,23,26,0.08); }
+  .card .photo{
+    width:100%; height:120px;
     background:var(--card-bg, var(--paper-2));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    margin:-20px -18px 0;
+    width:calc(100% + 36px);
+    overflow:hidden;
   }
-  .card-image svg{ width:54px; height:54px; color:var(--card-color, var(--steel)); }
-  .card-image .tag{
-    position:absolute;
-    top:9px; left:9px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:9px;
-    letter-spacing:0.03em;
+  .card .photo img{ width:100%; height:100%; object-fit:contain; mix-blend-mode:multiply; }
+  .card .top-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
+  .card .icon-badge{
+    width:32px; height:32px; border-radius:8px;
+    background:var(--card-bg, var(--paper-2));
     color:var(--card-color, var(--steel));
-    background:rgba(255,255,255,0.8);
-    padding:3px 8px;
-    border-radius:var(--r-pill);
-    text-transform:uppercase;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
   }
-  .card-body{ padding:14px 14px 16px; display:flex; flex-direction:column; gap:10px; flex:1; }
-  .card .name{ font-size:13.5px; font-weight:500; line-height:1.35; flex:1; min-height:36px; }
-  .card .name mark{ background:var(--yellow); color:var(--charcoal); padding:0 1px; border-radius:2px; }
-  .card .brand-badge{ font-size:10px; color:var(--steel-light); letter-spacing:0.03em; font-weight:600; }
+  .card .icon-badge svg{ width:17px; height:17px; }
+  .card .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.04em;
+    color:var(--card-color, var(--steel));
+    text-transform:uppercase;
+    text-align:right;
+  }
+  .card .name{ font-size:14.5px; font-weight:500; line-height:1.35; flex:1; }
+  .card .name mark{ background:var(--yellow); color:var(--charcoal); padding:0 1px; }
   .card .price-row{
     display:flex; justify-content:space-between; align-items:baseline;
-    padding-top:10px; border-top:1px dashed var(--line);
+    border-top:1px dashed var(--line); padding-top:10px;
   }
-  .card .price{ font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:19px; color:var(--charcoal); }
-  .card .price .cur{ font-size:11.5px; color:var(--steel); margin-right:3px; }
-  .card .quote-btn{
-    display:flex; align-items:center; justify-content:center; gap:6px;
-    width:100%; margin-top:2px; padding:9px 10px;
-    background:var(--charcoal); color:#fff; border:none; border-radius:var(--r-sm);
-    font-size:12.5px; font-weight:600; letter-spacing:0.01em; cursor:pointer;
-    text-decoration:none; transition:background .15s ease;
-  }
-  .card .quote-btn:hover{ background:var(--orange); }
-  .card .quote-btn svg{ width:14px; height:14px; }
+  .card .price{ font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:21px; color:var(--charcoal); }
+  .card .price .cur{ font-size:12px; color:var(--steel); margin-right:3px; }
+  .card .brand-badge{ font-size:10.5px; color:var(--steel-light); letter-spacing:0.04em; font-weight:600; }
 
   .empty-state{ grid-column:1/-1; text-align:center; padding:70px 20px; color:var(--steel); }
   .empty-state .big{ font-family:'Oswald', sans-serif; font-size:22px; color:var(--ink); margin-bottom:8px; }
 
-  /* --- Mobile category chips (shown instead of sidebar on small screens) --- */
-  .mobile-cats{ display:none; gap:8px; overflow-x:auto; padding-bottom:6px; margin-bottom:18px; }
-  .mobile-cats button{
-    flex-shrink:0; white-space:nowrap; font-size:12.5px; font-family:inherit; cursor:pointer;
-    padding:9px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:#fff; color:var(--ink);
-  }
-  .mobile-cats button.active{ background:var(--charcoal); border-color:var(--charcoal); color:#fff; }
-
-  /* ---------- Pagination ---------- */
-  .pagination{
-    display:flex; align-items:center; justify-content:center; gap:8px;
-    margin-top:36px; flex-wrap:wrap;
-  }
-  .pagination button{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:13px;
-    min-width:38px; height:38px;
-    padding:0 12px;
-    border-radius:var(--r-pill);
-    border:1px solid var(--line);
-    background:#fff;
-    color:var(--ink);
-    cursor:pointer;
-    transition:background .15s ease, color .15s ease, border-color .15s ease;
-    display:inline-flex; align-items:center; justify-content:center; gap:6px;
-  }
-  .pagination button:hover:not(:disabled){ border-color:var(--orange); color:var(--orange); }
-  .pagination button.active{ background:var(--charcoal); border-color:var(--charcoal); color:#fff; }
-  .pagination button:disabled{ opacity:0.35; cursor:not-allowed; }
-  .pagination button svg{ width:15px; height:15px; }
-
   /* ---------- About ---------- */
-  .about{ background:var(--paper-2); }
+  .about{ background:var(--paper-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
   .about-inner{ max-width:1220px; margin:0 auto; padding:74px 24px; display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; }
-  .about h2{ font-size:28px; font-weight:600; margin-bottom:18px; }
-  .about-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:20px; }
+  .about h2{ font-size:30px; font-weight:600; margin-bottom:18px; }
+  .about-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:22px; }
   .about-list li{ display:flex; gap:16px; align-items:flex-start; }
   .about-list .idx{
     font-family:'IBM Plex Mono', monospace; color:#fff; background:var(--orange);
-    font-weight:600; font-size:13px; padding:5px 9px; flex-shrink:0; border-radius:8px;
+    font-weight:600; font-size:13px; padding:4px 8px; flex-shrink:0;
   }
   .about-list h3{ font-size:15px; font-weight:600; text-transform:none; letter-spacing:0; font-family:'IBM Plex Sans', sans-serif; margin-bottom:4px; }
   .about-list p{ font-size:14px; color:var(--steel); line-height:1.55; margin:0; }
@@ -441,18 +406,19 @@
 
   /* ---------- Contact ---------- */
   .contact{ max-width:1220px; margin:0 auto; padding:74px 24px; display:grid; grid-template-columns:1fr 1fr; gap:56px; }
-  .contact h2{ font-size:28px; font-weight:600; margin-bottom:14px; }
+  .contact h2{ font-size:30px; font-weight:600; margin-bottom:14px; }
   .contact p.lead{ color:var(--steel); font-size:15px; line-height:1.6; max-width:44ch; }
-  .contact-cards{ display:flex; flex-direction:column; gap:14px; }
-  .ccard{ border:1px solid var(--line); background:#fff; padding:18px 20px; display:flex; gap:16px; align-items:flex-start; border-radius:var(--r-md); box-shadow:var(--shadow-soft); }
+  .contact-cards{ display:flex; flex-direction:column; gap:16px; }
+  .ccard{ border:1px solid var(--line); background:#fff; padding:18px 20px; display:flex; gap:16px; align-items:flex-start; }
   .ccard svg{ width:20px; height:20px; color:var(--orange); flex-shrink:0; margin-top:2px; }
-  .ccard h3{ font-size:12.5px; letter-spacing:0.04em; font-family:'IBM Plex Mono', monospace; text-transform:uppercase; color:var(--steel); margin-bottom:4px; }
+  .ccard h3{ font-size:13px; letter-spacing:0.04em; font-family:'IBM Plex Mono', monospace; text-transform:uppercase; color:var(--steel); margin-bottom:4px; }
   .ccard p{ margin:0; font-size:15px; font-weight:500; }
+  .ccard .note{ font-size:12.5px; color:var(--steel-light); font-weight:400; margin-top:2px; }
 
   /* ---------- Footer ---------- */
   footer{ background:var(--charcoal); color:var(--steel-light); }
   .footer-inner{
-    max-width:1220px; margin:0 auto; padding:36px 24px;
+    max-width:1220px; margin:0 auto; padding:40px 24px;
     display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:13px;
   }
   .footer-inner .fbrand{ color:#fff; font-family:'Oswald', sans-serif; letter-spacing:0.03em; }
@@ -460,22 +426,18 @@
   /* ---------- Responsive ---------- */
   @media (max-width:1000px){
     .hero-inner{ grid-template-columns:1fr; }
-    .grid{ grid-template-columns:repeat(3,1fr); }
+    .cat-grid{ grid-template-columns:repeat(3,1fr); }
+    .grid{ grid-template-columns:repeat(2,1fr); }
     .about-inner, .contact{ grid-template-columns:1fr; }
     nav ul{ display:none; }
-    .store-layout{ grid-template-columns:1fr; }
-    .sidebar{ display:none; }
-    .mobile-cats{ display:flex; }
-  }
-  @media (max-width:700px){
-    .grid{ grid-template-columns:repeat(2,1fr); }
   }
   @media (max-width:560px){
+    .cat-grid{ grid-template-columns:repeat(2,1fr); }
     .grid{ grid-template-columns:1fr; }
-    .hero{ padding:44px 18px 60px; border-radius:0 0 24px 24px; }
+    .hero{ padding:48px 18px 90px; clip-path:polygon(0 0,100% 0,100% 94%,0 100%); }
+    .categories{ margin-top:-40px; }
     .hero-stats{ flex-wrap:wrap; }
     .hero-stats div{ flex:1 1 45%; border-right:none; padding-right:0; margin-bottom:14px; }
-    .toolbar{ flex-direction:column; align-items:flex-start; }
   }
 </style>
 </head>
@@ -520,16 +482,16 @@
   </div>
 </section>
 
-<main>
-  <div class="breadcrumb">
-    <a href="#inicio">Inicio</a><span class="sep">/</span><span class="current">Equipos de Protección Personal (EPP)</span>
-  </div>
+<section class="categories" aria-label="Categorías de productos">
+  <div class="cat-grid" id="catGrid"></div>
+</section>
 
+<main>
   <section class="catalog" id="catalogo">
     <div class="catalog-head">
       <div>
         <h2>Catálogo de productos</h2>
-        <p>Filtra por categoría, busca por nombre y ordena por precio. Todos los precios están expresados en soles (S/).</p>
+        <p>Busca por nombre de producto o elige una categoría arriba. Todos los precios están expresados en soles (S/).</p>
       </div>
     </div>
 
@@ -538,40 +500,12 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
     </div>
 
-    <div class="mobile-cats" id="mobileCats"></div>
-
-    <div class="store-layout">
-      <aside class="sidebar">
-        <div class="sidebar-title">Categorías</div>
-        <ul class="cat-list" id="catList"></ul>
-      </aside>
-
-      <div class="store-content">
-        <div class="toolbar">
-          <div class="toolbar-count" id="resultsCount"></div>
-          <div class="toolbar-controls">
-            <label for="sortSelect">Ordenar por</label>
-            <select id="sortSelect">
-              <option value="relevancia">Relevancia</option>
-              <option value="precio-asc">Precio: menor a mayor</option>
-              <option value="precio-desc">Precio: mayor a menor</option>
-              <option value="nombre-asc">Nombre A-Z</option>
-            </select>
-            <label for="perPageSelect">Mostrar</label>
-            <select id="perPageSelect">
-              <option value="16">16</option>
-              <option value="24">24</option>
-              <option value="36">36</option>
-              <option value="66">Todos</option>
-            </select>
-            <button id="clearBtn" class="clear-btn" type="button">Limpiar filtros</button>
-          </div>
-        </div>
-
-        <div class="grid" id="productGrid"></div>
-        <div class="pagination" id="pagination"></div>
-      </div>
+    <div class="results-meta">
+      <span id="resultsCount"></span>
+      <button id="clearBtn" type="button">Limpiar filtros</button>
     </div>
+
+    <div class="grid" id="productGrid"></div>
   </section>
 
   <section class="about" id="nosotros">
@@ -637,7 +571,7 @@
 </footer>
 
 <script>
-const PRODUCTS = [{"producto": "MENTONERA PARA CASCO DE SEGURIDAD TRUPER", "precio": 6.0, "categoria": "Cascos y Protección Facial"}, {"producto": "RESPIRADOR N95 CON VALVULA PARA POLVOIS TRUPER", "precio": 8.2, "categoria": "Protección Respiratoria"}, {"producto": "CHALECO DE SEGURIDAD CON CINTA REFLECTIVAS PRETUL", "precio": 8.9, "categoria": "Chalecos de Seguridad"}, {"producto": "GUANTE CARNAZA USOS GENERALES TRUPER", "precio": 15.9, "categoria": "Guantes"}, {"producto": "GUANTE CARNAZA REFORZADO TRUPER", "precio": 16.0, "categoria": "Guantes"}, {"producto": "GABARDINA DOBLE CAPA  XL TRUPER", "precio": 37.0, "categoria": "Ropa Impermeable"}, {"producto": "CONJUNTO IMPERMEABLE DOBLE CAPA XL TRUPER", "precio": 48.9, "categoria": "Ropa Impermeable"}, {"producto": "ARNES COMPLETO 3 ANILLOS LATERALES TRUPER", "precio": 79.0, "categoria": "Protección Contra Caídas"}, {"producto": "KIT CONTRA CAIDA CON 3 ANILLOS INCLUYE MALETA", "precio": 189.9, "categoria": "Protección Contra Caídas"}, {"producto": "TAPON AUDITIVO ESPUMA CON CORDON TRUPER", "precio": 2.9, "categoria": "Protección Auditiva"}, {"producto": "PONCHO DESECHABLE UNITALLA PRETUL", "precio": 4.0, "categoria": "Ropa Impermeable"}, {"producto": "GUANTE DE ALGODÓN CON PUNTOS PVC PRETUL", "precio": 4.7, "categoria": "Guantes"}, {"producto": "GUANTE DE LATEX PARA LIMPIEZA CHICOS PRETUL", "precio": 4.8, "categoria": "Guantes"}, {"producto": "RESPIRADOR PLEGABLE N95 PARA POLVOS TRUPER", "precio": 4.9, "categoria": "Protección Respiratoria"}, {"producto": "LENTE DE SEGURIDAD TRANSPARENTE PRETUL", "precio": 5.0, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE DE SEGURIDAD GRISES PRETUL LITE", "precio": 5.1, "categoria": "Lentes y Protección Visual"}, {"producto": "GUANTE DE LATEX PARA LIMPIEZA MEDIANO PRETUL", "precio": 5.2, "categoria": "Guantes"}, {"producto": "GUANTE DE LATEX PARA LIMPIEZA GRANDE PRETUL", "precio": 5.2, "categoria": "Guantes"}, {"producto": "LENTE DE SEGURIDAD AJUSTABLES TRANSPARENTE TRUPER ", "precio": 5.8, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE DE SEGURIDAD AJUSTABLES GRISES TRUPER ", "precio": 5.8, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE DE SEGURIDAD GENERICO MK-0943", "precio": 5.9, "categoria": "Lentes y Protección Visual"}, {"producto": "BLISTER CON 10 MASCARILLAS DE POLVO TIPO CONCHA TRUPER", "precio": 6.1, "categoria": "Protección Respiratoria"}, {"producto": "LENTES DE SEGURIDAD GRISES TRUPER SAFE", "precio": 6.2, "categoria": "Lentes y Protección Visual"}, {"producto": "FILTRO DE REPUESTO POLVO Y PARTICULAS PRETUL", "precio": 6.6, "categoria": "Protección Respiratoria"}, {"producto": "GUANTE DE LIMPIEZA CHICOS TRUPER", "precio": 6.6, "categoria": "Guantes"}, {"producto": "GUANTE DE LIMPIEZA MEDIANO TRUPER", "precio": 6.6, "categoria": "Guantes"}, {"producto": "GUANTE DE LIMPIEZA GRANDE TRUPER", "precio": 6.6, "categoria": "Guantes"}, {"producto": "GOOGLE DE SEGURIDAD CON VENTILACION DIRECTA PRETUL", "precio": 6.8, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE DE SEGURIDAD TRANSPARENTE TRUPER", "precio": 7.0, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE CLARO DE SEGURIDAD AJUSTABLE CLAROS C/ANTIPAÑO TRUPER", "precio": 7.0, "categoria": "Lentes y Protección Visual"}, {"producto": "GUANTE DE NYLON RECUBIERTO DE POLIURETANO TALLA S", "precio": 7.4, "categoria": "Guantes"}, {"producto": "GUANTE DE NYLON RECUBIERTO DE POLIURETANO TALLA G", "precio": 7.5, "categoria": "Guantes"}, {"producto": "SOBRELENTE DE SEGURIDAD TRANSPARENTE TRUPER SAFE", "precio": 7.6, "categoria": "Lentes y Protección Visual"}, {"producto": "GUANTE DE LATEX REFORZADO PARA LIMPIEZA CHICOS TRUPER", "precio": 7.6, "categoria": "Guantes"}, {"producto": "GUANTE DE LATEX REFORZADO PARA LIMPIEZA MEDAINO TRUPER", "precio": 7.6, "categoria": "Guantes"}, {"producto": "GUANTE DE LATEX REFORZADO PARA LIMPIEZA GRANDES TRUPER", "precio": 7.6, "categoria": "Guantes"}, {"producto": "GUANTE DE POLIESTER RECUBIERTO DE LATEX TRUPER", "precio": 7.9, "categoria": "Guantes"}, {"producto": "CARTUCHO DE REPIUESTO VAPORES ORGANICOS PRETUL", "precio": 8.2, "categoria": "Protección Respiratoria"}, {"producto": "ROLLO DE 100 M CINTA DELIMITADORA TRUPER", "precio": 8.5, "categoria": "Cintas y Señalización"}, {"producto": "GOOGLE DE SEGURIDAD CON VENTILACION INDIRECTA TRUPER", "precio": 8.6, "categoria": "Lentes y Protección Visual"}, {"producto": "GUANTE DE LATEX PARA PINTOR MEDIANO TRUPER", "precio": 8.6, "categoria": "Guantes"}, {"producto": "GUANTE DE LATEX PARA PINTOR GRANDE TRUPER", "precio": 8.6, "categoria": "Guantes"}, {"producto": "CHALECO DE SEGURIDAD CON CINTA REFLEJANTES VERDE TRUPER", "precio": 8.9, "categoria": "Chalecos de Seguridad"}, {"producto": "CARTUCHO DE REPUESTO PINTURA SPRAY PRETUL", "precio": 8.9, "categoria": "Protección Respiratoria"}, {"producto": "SUSPENSION PARA CASCOS AJUST POR INTERVALOS PRETUL", "precio": 9.0, "categoria": "Cascos y Protección Facial"}, {"producto": "GUANTES DE POLIESTER RECUBIERTOS DE LATEX M TRUPER", "precio": 9.0, "categoria": "Guantes"}, {"producto": "GUANTES DE POLIESTER RECUBIERTOS DE LATEX G TRUPER", "precio": 9.0, "categoria": "Guantes"}, {"producto": "LENTE DE SEGURIDAD GRISES TRUPER VISION", "precio": 9.5, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE DE SEGURIDAD ESPEJO PLATA TRUPER VISION", "precio": 9.5, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE DE SEGURIDAD ESPEJO AZUL TRUPER VISION", "precio": 9.5, "categoria": "Lentes y Protección Visual"}, {"producto": "CHALECO DE SEGURIDAD NARANJA CON CINTA DE ALTA VISIBILIDAD", "precio": 9.8, "categoria": "Chalecos de Seguridad"}, {"producto": "BLISTER CON 2 RESPIRADOR N95 PARA POLVO Y PARTICULAS", "precio": 9.8, "categoria": "Protección Respiratoria"}, {"producto": "CHALECO DE SEGURIDAD VERDE CON CINTAS ALTA VISIBILIDAD", "precio": 9.8, "categoria": "Chalecos de Seguridad"}, {"producto": "CHALECO DE SEGURIDAD VERDE ALTA VISIBILIDAD CON CIERRE", "precio": 9.8, "categoria": "Chalecos de Seguridad"}, {"producto": "GUANTE DE NYLON RECUBIERTO DE POLIURETANO TALLA M", "precio": 10.0, "categoria": "Guantes"}, {"producto": "GUANTE DE NYLON RECUBIERTO DE NITRILO CH TRUPER", "precio": 10.5, "categoria": "Guantes"}, {"producto": "LENTE DE SEGURIDAD TRANSPARENTE CON ANTIEMPAÑO VISION", "precio": 10.7, "categoria": "Lentes y Protección Visual"}, {"producto": "GUANTE CARNAZA Y LONETA USO LIGERO TRUPER", "precio": 10.7, "categoria": "Guantes"}, {"producto": "GUANTE DE CARNAZA CORTO PRETUL ", "precio": 11.0, "categoria": "Guantes"}, {"producto": "REPUESTO PARA PROYECTOR FACIAL PF -500P PRETUL", "precio": 11.3, "categoria": "Cascos y Protección Facial"}, {"producto": "GUANTE  DE NYLON RECUBIERTO DE NITRILO TRUPER", "precio": 11.5, "categoria": "Guantes"}, {"producto": "CINTA DE ADVERTENCIA PRECAUCION X 100 METROS TRUPER", "precio": 11.9, "categoria": "Cintas y Señalización"}, {"producto": "LENTES DE SEGURIDAD TRANSPARENTES TRUPER VISION", "precio": 12.0, "categoria": "Lentes y Protección Visual"}, {"producto": "CHALECO DE SEGURIDAD NARANJA ALTA VISIBILIDAD CON CIERRE", "precio": 12.0, "categoria": "Chalecos de Seguridad"}, {"producto": "CINTA DE EMPACAR FRAGIL 2 X 150 M TRUPER", "precio": 12.9, "categoria": "Cintas y Señalización"}, {"producto": "SUSPENSION PARA CASCOS  AJUSTE POR MATRACA TRUPER", "precio": 13.0, "categoria": "Cascos y Protección Facial"}];
+const PRODUCTS = [{"producto": "MENTONERA PARA CASCO DE SEGURIDAD TRUPER", "precio": 6.0, "categoria": "Cascos y Protección Facial", "imagen": "images/imagen1.jpg"}, {"producto": "RESPIRADOR N95 CON VALVULA PARA POLVOIS TRUPER", "precio": 8.2, "categoria": "Protección Respiratoria", "imagen": "images/imagen2.jpg"}, {"producto": "CHALECO DE SEGURIDAD CON CINTA REFLECTIVAS PRETUL", "precio": 8.9, "categoria": "Chalecos de Seguridad", "imagen": "images/imagen3.jpg"}, {"producto": "GUANTE CARNAZA USOS GENERALES TRUPER", "precio": 15.9, "categoria": "Guantes", "imagen": "images/imagen4.jpg"}, {"producto": "GUANTE CARNAZA REFORZADO TRUPER", "precio": 16.0, "categoria": "Guantes", "imagen": "images/imagen5.jpg"}, {"producto": "GABARDINA DOBLE CAPA  XL TRUPER", "precio": 37.0, "categoria": "Ropa Impermeable", "imagen": "images/imagen6.jpg"}, {"producto": "CONJUNTO IMPERMEABLE DOBLE CAPA XL TRUPER", "precio": 48.9, "categoria": "Ropa Impermeable", "imagen": "images/imagen7.jpg"}, {"producto": "ARNES COMPLETO 3 ANILLOS LATERALES TRUPER", "precio": 79.0, "categoria": "Protección Contra Caídas", "imagen": "images/imagen8.jpg"}, {"producto": "KIT CONTRA CAIDA CON 3 ANILLOS INCLUYE MALETA", "precio": 189.9, "categoria": "Protección Contra Caídas", "imagen": "images/imagen9.jpg"}, {"producto": "TAPON AUDITIVO ESPUMA CON CORDON TRUPER", "precio": 2.9, "categoria": "Protección Auditiva", "imagen": "images/imagen10.jpg"}, {"producto": "PONCHO DESECHABLE UNITALLA PRETUL", "precio": 4.0, "categoria": "Ropa Impermeable", "imagen": "images/imagen11.jpg"}, {"producto": "GUANTE DE ALGODÓN CON PUNTOS PVC PRETUL", "precio": 4.7, "categoria": "Guantes", "imagen": "images/imagen12.jpg"}, {"producto": "GUANTE DE LATEX PARA LIMPIEZA CHICOS PRETUL", "precio": 4.8, "categoria": "Guantes", "imagen": "images/imagen13.jpg"}, {"producto": "RESPIRADOR PLEGABLE N95 PARA POLVOS TRUPER", "precio": 4.9, "categoria": "Protección Respiratoria", "imagen": "images/imagen14.jpg"}, {"producto": "LENTE DE SEGURIDAD TRANSPARENTE PRETUL", "precio": 5.0, "categoria": "Lentes y Protección Visual", "imagen": "images/imagen15.jpg"}, {"producto": "LENTE DE SEGURIDAD GRISES PRETUL LITE", "precio": 5.1, "categoria": "Lentes y Protección Visual", "imagen": "images/imagen16.jpg"}, {"producto": "GUANTE DE LATEX PARA LIMPIEZA MEDIANO PRETUL", "precio": 5.2, "categoria": "Guantes", "imagen": "images/imagen17.jpg"}, {"producto": "GUANTE DE LATEX PARA LIMPIEZA GRANDE PRETUL", "precio": 5.2, "categoria": "Guantes", "imagen": "images/imagen18.jpg"}, {"producto": "LENTE DE SEGURIDAD AJUSTABLES TRANSPARENTE TRUPER ", "precio": 5.8, "categoria": "Lentes y Protección Visual", "imagen": "images/imagen19.jpg"}, {"producto": "LENTE DE SEGURIDAD AJUSTABLES GRISES TRUPER ", "precio": 5.8, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE DE SEGURIDAD GENERICO MK-0943", "precio": 5.9, "categoria": "Lentes y Protección Visual"}, {"producto": "BLISTER CON 10 MASCARILLAS DE POLVO TIPO CONCHA TRUPER", "precio": 6.1, "categoria": "Protección Respiratoria"}, {"producto": "LENTES DE SEGURIDAD GRISES TRUPER SAFE", "precio": 6.2, "categoria": "Lentes y Protección Visual"}, {"producto": "FILTRO DE REPUESTO POLVO Y PARTICULAS PRETUL", "precio": 6.6, "categoria": "Protección Respiratoria"}, {"producto": "GUANTE DE LIMPIEZA CHICOS TRUPER", "precio": 6.6, "categoria": "Guantes"}, {"producto": "GUANTE DE LIMPIEZA MEDIANO TRUPER", "precio": 6.6, "categoria": "Guantes"}, {"producto": "GUANTE DE LIMPIEZA GRANDE TRUPER", "precio": 6.6, "categoria": "Guantes"}, {"producto": "GOOGLE DE SEGURIDAD CON VENTILACION DIRECTA PRETUL", "precio": 6.8, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE DE SEGURIDAD TRANSPARENTE TRUPER", "precio": 7.0, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE CLARO DE SEGURIDAD AJUSTABLE CLAROS C/ANTIPAÑO TRUPER", "precio": 7.0, "categoria": "Lentes y Protección Visual"}, {"producto": "GUANTE DE NYLON RECUBIERTO DE POLIURETANO TALLA S", "precio": 7.4, "categoria": "Guantes"}, {"producto": "GUANTE DE NYLON RECUBIERTO DE POLIURETANO TALLA G", "precio": 7.5, "categoria": "Guantes"}, {"producto": "SOBRELENTE DE SEGURIDAD TRANSPARENTE TRUPER SAFE", "precio": 7.6, "categoria": "Lentes y Protección Visual"}, {"producto": "GUANTE DE LATEX REFORZADO PARA LIMPIEZA CHICOS TRUPER", "precio": 7.6, "categoria": "Guantes"}, {"producto": "GUANTE DE LATEX REFORZADO PARA LIMPIEZA MEDAINO TRUPER", "precio": 7.6, "categoria": "Guantes"}, {"producto": "GUANTE DE LATEX REFORZADO PARA LIMPIEZA GRANDES TRUPER", "precio": 7.6, "categoria": "Guantes"}, {"producto": "GUANTE DE POLIESTER RECUBIERTO DE LATEX TRUPER", "precio": 7.9, "categoria": "Guantes"}, {"producto": "CARTUCHO DE REPIUESTO VAPORES ORGANICOS PRETUL", "precio": 8.2, "categoria": "Protección Respiratoria"}, {"producto": "ROLLO DE 100 M CINTA DELIMITADORA TRUPER", "precio": 8.5, "categoria": "Cintas y Señalización"}, {"producto": "GOOGLE DE SEGURIDAD CON VENTILACION INDIRECTA TRUPER", "precio": 8.6, "categoria": "Lentes y Protección Visual"}, {"producto": "GUANTE DE LATEX PARA PINTOR MEDIANO TRUPER", "precio": 8.6, "categoria": "Guantes"}, {"producto": "GUANTE DE LATEX PARA PINTOR GRANDE TRUPER", "precio": 8.6, "categoria": "Guantes"}, {"producto": "CHALECO DE SEGURIDAD CON CINTA REFLEJANTES VERDE TRUPER", "precio": 8.9, "categoria": "Chalecos de Seguridad"}, {"producto": "CARTUCHO DE REPUESTO PINTURA SPRAY PRETUL", "precio": 8.9, "categoria": "Protección Respiratoria"}, {"producto": "SUSPENSION PARA CASCOS AJUST POR INTERVALOS PRETUL", "precio": 9.0, "categoria": "Cascos y Protección Facial"}, {"producto": "GUANTES DE POLIESTER RECUBIERTOS DE LATEX M TRUPER", "precio": 9.0, "categoria": "Guantes"}, {"producto": "GUANTES DE POLIESTER RECUBIERTOS DE LATEX G TRUPER", "precio": 9.0, "categoria": "Guantes"}, {"producto": "LENTE DE SEGURIDAD GRISES TRUPER VISION", "precio": 9.5, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE DE SEGURIDAD ESPEJO PLATA TRUPER VISION", "precio": 9.5, "categoria": "Lentes y Protección Visual"}, {"producto": "LENTE DE SEGURIDAD ESPEJO AZUL TRUPER VISION", "precio": 9.5, "categoria": "Lentes y Protección Visual"}, {"producto": "CHALECO DE SEGURIDAD NARANJA CON CINTA DE ALTA VISIBILIDAD", "precio": 9.8, "categoria": "Chalecos de Seguridad"}, {"producto": "BLISTER CON 2 RESPIRADOR N95 PARA POLVO Y PARTICULAS", "precio": 9.8, "categoria": "Protección Respiratoria"}, {"producto": "CHALECO DE SEGURIDAD VERDE CON CINTAS ALTA VISIBILIDAD", "precio": 9.8, "categoria": "Chalecos de Seguridad"}, {"producto": "CHALECO DE SEGURIDAD VERDE ALTA VISIBILIDAD CON CIERRE", "precio": 9.8, "categoria": "Chalecos de Seguridad"}, {"producto": "GUANTE DE NYLON RECUBIERTO DE POLIURETANO TALLA M", "precio": 10.0, "categoria": "Guantes"}, {"producto": "GUANTE DE NYLON RECUBIERTO DE NITRILO CH TRUPER", "precio": 10.5, "categoria": "Guantes"}, {"producto": "LENTE DE SEGURIDAD TRANSPARENTE CON ANTIEMPAÑO VISION", "precio": 10.7, "categoria": "Lentes y Protección Visual"}, {"producto": "GUANTE CARNAZA Y LONETA USO LIGERO TRUPER", "precio": 10.7, "categoria": "Guantes"}, {"producto": "GUANTE DE CARNAZA CORTO PRETUL ", "precio": 11.0, "categoria": "Guantes"}, {"producto": "REPUESTO PARA PROYECTOR FACIAL PF -500P PRETUL", "precio": 11.3, "categoria": "Cascos y Protección Facial"}, {"producto": "GUANTE  DE NYLON RECUBIERTO DE NITRILO TRUPER", "precio": 11.5, "categoria": "Guantes"}, {"producto": "CINTA DE ADVERTENCIA PRECAUCION X 100 METROS TRUPER", "precio": 11.9, "categoria": "Cintas y Señalización"}, {"producto": "LENTES DE SEGURIDAD TRANSPARENTES TRUPER VISION", "precio": 12.0, "categoria": "Lentes y Protección Visual"}, {"producto": "CHALECO DE SEGURIDAD NARANJA ALTA VISIBILIDAD CON CIERRE", "precio": 12.0, "categoria": "Chalecos de Seguridad"}, {"producto": "CINTA DE EMPACAR FRAGIL 2 X 150 M TRUPER", "precio": 12.9, "categoria": "Cintas y Señalización"}, {"producto": "SUSPENSION PARA CASCOS  AJUSTE POR MATRACA TRUPER", "precio": 13.0, "categoria": "Cascos y Protección Facial"}];
 
 const CATEGORY_META = {
   'Guantes': { color:'var(--c-guantes)', bg:'var(--c-guantes-bg)', icon:'glove' },
@@ -652,137 +586,28 @@ const CATEGORY_META = {
   'Otros': { color:'var(--c-otros)', bg:'var(--c-otros-bg)', icon:'tool' }
 };
 
-/* Base icon set (category-level fallback + shared shapes) */
 const ICONS = {
   helmet: '<path d="M4 15a8 8 0 0 1 16 0v1H4z"/><path d="M2 16h20"/><path d="M9 4.5C9 3 10 2 12 2s3 1 3 2.5"/>',
-  chinstrap: '<path d="M4 13a8 8 0 0 1 16 0v1H4z"/><path d="M2 14h20"/><path d="M8 17l1 4h6l1-4"/>',
-  faceshield: '<path d="M4 13a8 8 0 0 1 16 0v1H4z"/><path d="M2 14h20"/><path d="M6 16.5a9 9 0 0 0 12 0"/>',
-  suspension: '<circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M3 12h18"/><path d="M5.8 5.8l12.4 12.4"/><path d="M18.2 5.8L5.8 18.2"/>',
   glove: '<path d="M8 11V4a1.5 1.5 0 0 1 3 0v5"/><path d="M11 9V3a1.5 1.5 0 0 1 3 0v6"/><path d="M14 9.5V4a1.5 1.5 0 0 1 3 0v9"/><path d="M17 11.5V8a1.5 1.5 0 0 1 3 0v7c0 3.5-2.5 6.5-6.5 6.5H11c-3 0-5-2-6-4l-2.5-5A1.4 1.4 0 0 1 5 10.5c.8-.4 1.7 0 2 .8L8 14"/>',
-  gloveDotted: '<path d="M8 11V4a1.5 1.5 0 0 1 3 0v5"/><path d="M11 9V3a1.5 1.5 0 0 1 3 0v6"/><path d="M14 9.5V4a1.5 1.5 0 0 1 3 0v9"/><path d="M17 11.5V8a1.5 1.5 0 0 1 3 0v7c0 3.5-2.5 6.5-6.5 6.5H11c-3 0-5-2-6-4l-2.5-5A1.4 1.4 0 0 1 5 10.5c.8-.4 1.7 0 2 .8L8 14"/><circle cx="9.5" cy="15.5" r="0.6" fill="currentColor" stroke="none"/><circle cx="12.5" cy="17" r="0.6" fill="currentColor" stroke="none"/><circle cx="15" cy="15.5" r="0.6" fill="currentColor" stroke="none"/>',
   glasses: '<circle cx="6" cy="13" r="3.2"/><circle cx="18" cy="13" r="3.2"/><path d="M9.2 12h5.6"/><path d="M2.8 12l1-3.5A2 2 0 0 1 5.7 7"/><path d="M21.2 12l-1-3.5a2 2 0 0 0-1.9-1.5"/>',
-  overglasses: '<circle cx="6.5" cy="13" r="4.1"/><circle cx="17.5" cy="13" r="4.1"/><path d="M10.4 12h3.2"/><path d="M2.2 11.5l1-3.7A2 2 0 0 1 5.1 6.3"/><path d="M21.8 11.5l-1-3.7a2 2 0 0 0-1.9-1.5"/>',
-  goggle: '<ellipse cx="8" cy="12" rx="5" ry="5.4"/><ellipse cx="16" cy="12" rx="5" ry="5.4"/><path d="M13 12h-2"/><path d="M3 9.5l-2 2 2 2"/><path d="M21 9.5l2 2-2 2"/>',
   vest: '<path d="M8 3l4 2 4-2 3 4-2 2v11H5V9L3 7z"/><path d="M9.5 5.5L12 21"/><path d="M14.5 5.5L12 21"/>',
-  vestZip: '<path d="M8 3l4 2 4-2 3 4-2 2v11H5V9L3 7z"/><path d="M12 5.5V21" stroke-dasharray="2 2.4"/>',
   mask: '<path d="M4 12a8 8 0 0 1 16 0v2a3 3 0 0 1-3 3h-1l-2 3-2-3H9a3 3 0 0 1-3-3z"/><circle cx="9" cy="12" r="1.4"/><circle cx="15" cy="12" r="1.4"/>',
-  maskValve: '<path d="M4 12a8 8 0 0 1 16 0v2a3 3 0 0 1-3 3h-1l-2 3-2-3H9a3 3 0 0 1-3-3z"/><circle cx="12" cy="13" r="2.3"/>',
-  maskFold: '<path d="M3 10c3-2 15-2 18 0"/><path d="M3 13c3 2 15 2 18 0"/><path d="M3 10v3"/><path d="M21 10v3"/>',
-  cartridge: '<rect x="7" y="4" width="10" height="16" rx="3"/><path d="M7 9.5h10"/><path d="M7 15h10"/>',
-  filterDisc: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="8.2" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="15.8" r="0.9" fill="currentColor" stroke="none"/><circle cx="8.2" cy="12" r="0.9" fill="currentColor" stroke="none"/><circle cx="15.8" cy="12" r="0.9" fill="currentColor" stroke="none"/>',
-  blister: '<rect x="3" y="7" width="18" height="10" rx="2.5"/><circle cx="7.5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="16.5" cy="12" r="1.6"/>',
   tape: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/>',
   harness: '<path d="M12 2v20"/><path d="M5 6h14"/><path d="M6 6l3 16"/><path d="M18 6l-3 16"/><circle cx="12" cy="6" r="2"/>',
-  harnessKit: '<rect x="4" y="9" width="16" height="11" rx="2.5"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/><path d="M4 14.5h16"/>',
   raincoat: '<path d="M9 2a3 3 0 0 0 6 0"/><path d="M6 8l-3 3 3 2"/><path d="M18 8l3 3-3 2"/><path d="M7 7l-1.5 14h13L17 7"/><path d="M7 7a5 5 0 0 1 10 0"/>',
-  poncho: '<path d="M12 3l9 16H3z"/><circle cx="12" cy="7.5" r="2"/>',
-  rainsuit: '<path d="M9 2a3 3 0 0 0 6 0"/><path d="M7 7a5 5 0 0 1 10 0"/><path d="M7 7l-1.3 8h4l1.3 5h2l1.3-5h4L17 7"/>',
   earplug: '<ellipse cx="12" cy="8" rx="4" ry="5"/><path d="M12 13v6a2.5 2.5 0 0 0 5 0"/>',
   tool: '<path d="M14.7 6.3a4 4 0 1 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 1 1 5.4-5.4z"/>'
 };
 
-/* Tone palette for product-level color variation within a category */
-const TONES = {
-  leather:      { color:'#8B5E34', bg:'#F2E4D3' },
-  latex:        { color:'#E8590C', bg:'#FCE3D6' },
-  latexReinf:   { color:'#C2410C', bg:'#FBD5BC' },
-  paint:        { color:'#B23A6E', bg:'#F4DFE8' },
-  cotton:       { color:'#2E8B4E', bg:'#DDF0E3' },
-  nylon:        { color:'#5B626C', bg:'#E7E8EA' },
-  nitrilo:      { color:'#3A3F45', bg:'#E1E2E4' },
-  poly:         { color:'#2568A8', bg:'#DCE9F4' },
-  clear:        { color:'#2568A8', bg:'#DCE9F4' },
-  grey:         { color:'#5B626C', bg:'#E7E8EA' },
-  mirrorBlue:   { color:'#1B7FA3', bg:'#DBEBF2' },
-  mirrorSilver: { color:'#7C8189', bg:'#E7E7E7' },
-  goggleDirect: { color:'#2568A8', bg:'#DCE9F4' },
-  goggleIndir:  { color:'#1B7FA3', bg:'#DBEBF2' },
-  green:        { color:'#2E8B4E', bg:'#DDF0E3' },
-  orange:       { color:'#E8590C', bg:'#FCE3D6' }
-};
-
-function iconSvg(name, color){
-  return `<svg viewBox="0 0 24 24" fill="none" stroke="${color || 'currentColor'}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] || ICONS.tool}</svg>`;
-}
-
-function getProductVisual(p){
-  const n = p.producto.toUpperCase();
-  const meta = CATEGORY_META[p.categoria] || CATEGORY_META['Otros'];
-  let icon = meta.icon, tone = null;
-
-  switch(p.categoria){
-    case 'Guantes':
-      if(n.includes('CARNAZA')) { icon='glove'; tone='leather'; }
-      else if(n.includes('ALGOD')) { icon='gloveDotted'; tone='cotton'; }
-      else if(n.includes('PINTOR')) { icon='glove'; tone='paint'; }
-      else if(n.includes('LATEX') && n.includes('REFORZADO')) { icon='glove'; tone='latexReinf'; }
-      else if(n.includes('LATEX')) { icon='glove'; tone='latex'; }
-      else if(n.includes('NYLON') && n.includes('NITRILO')) { icon='glove'; tone='nitrilo'; }
-      else if(n.includes('NYLON')) { icon='glove'; tone='nylon'; }
-      else if(n.includes('POLIESTER')) { icon='glove'; tone='poly'; }
-      break;
-    case 'Lentes y Protección Visual':
-      if(n.includes('GOOGLE')) { icon='goggle'; tone = n.includes('INDIRECTA') ? 'goggleIndir' : 'goggleDirect'; }
-      else if(n.includes('SOBRELENTE')) { icon='overglasses'; tone='clear'; }
-      else if(n.includes('ESPEJO AZUL')) { icon='glasses'; tone='mirrorBlue'; }
-      else if(n.includes('ESPEJO PLATA')) { icon='glasses'; tone='mirrorSilver'; }
-      else if(n.includes('GRIS')) { icon='glasses'; tone='grey'; }
-      else { icon='glasses'; tone='clear'; }
-      break;
-    case 'Cascos y Protección Facial':
-      if(n.includes('MENTONERA')) icon='chinstrap';
-      else if(n.includes('PROYECTOR') || n.includes('FACIAL')) icon='faceshield';
-      else if(n.includes('SUSPENSION')) icon='suspension';
-      break;
-    case 'Chalecos de Seguridad':
-      tone = n.includes('VERDE') ? 'green' : 'orange';
-      icon = n.includes('CIERRE') ? 'vestZip' : 'vest';
-      break;
-    case 'Cintas y Señalización':
-      icon = 'tape';
-      break;
-    case 'Protección Contra Caídas':
-      icon = n.includes('KIT') ? 'harnessKit' : 'harness';
-      break;
-    case 'Protección Respiratoria':
-      if(n.includes('VALVULA')) icon='maskValve';
-      else if(n.includes('PLEGABLE') || n.includes('CONCHA')) icon='maskFold';
-      else if(n.includes('CARTUCHO')) icon='cartridge';
-      else if(n.includes('FILTRO')) icon='filterDisc';
-      else if(n.includes('BLISTER')) icon='blister';
-      else icon='maskValve';
-      break;
-    case 'Ropa Impermeable':
-      if(n.includes('PONCHO')) icon='poncho';
-      else if(n.includes('CONJUNTO')) icon='rainsuit';
-      else icon='raincoat';
-      break;
-  }
-
-  const t = tone ? TONES[tone] : null;
-  return {
-    icon,
-    color: t ? t.color : meta.color,
-    bg: t ? t.bg : meta.bg,
-    catColor: meta.color
-  };
+function iconSvg(name){
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] || ICONS.tool}</svg>`;
 }
 
 const grid = document.getElementById('productGrid');
-const catList = document.getElementById('catList');
-const mobileCats = document.getElementById('mobileCats');
+const catGrid = document.getElementById('catGrid');
 const searchInput = document.getElementById('searchInput');
-const sortSelect = document.getElementById('sortSelect');
-const perPageSelect = document.getElementById('perPageSelect');
 const resultsCount = document.getElementById('resultsCount');
 const clearBtn = document.getElementById('clearBtn');
-const paginationEl = document.getElementById('pagination');
-
-const WHATSAPP_NUMBER = '51962377295';
-
-let PAGE_SIZE = 16;
-let currentPage = 1;
-let sortMode = 'relevancia';
 
 const categoryCounts = PRODUCTS.reduce((acc,p) => { acc[p.categoria] = (acc[p.categoria]||0)+1; return acc; }, {});
 const categories = Object.keys(categoryCounts).sort((a,b) => categoryCounts[b]-categoryCounts[a]);
@@ -791,48 +616,32 @@ let activeCategory = null;
 let query = '';
 
 function renderCatTiles(){
-  const rows = [
-    `<li><button class="${activeCategory===null?'active':''}" style="--tile-color:var(--orange);--tile-bg:#FCE3D6" data-cat="">
-      <span class="dot"></span><span class="lbl">Todos los productos</span><span class="cnt">${PRODUCTS.length}</span>
-    </button></li>`
+  const tiles = [
+    `<button class="cat-tile ${activeCategory===null?'active':''}" style="--tile-color:var(--orange);--tile-bg:#FCE3D6" data-cat="">
+      <span class="cat-icon">${iconSvg('tool')}</span>
+      <span class="cat-name">Todos los productos</span>
+      <span class="cat-count">${PRODUCTS.length} artículos</span>
+    </button>`
   ];
   categories.forEach(cat => {
     const meta = CATEGORY_META[cat] || CATEGORY_META['Otros'];
-    rows.push(`
-      <li><button class="${activeCategory===cat?'active':''}" style="--tile-color:${meta.color};--tile-bg:${meta.bg}" data-cat="${encodeURIComponent(cat)}">
-        <span class="dot"></span><span class="lbl">${cat}</span><span class="cnt">${categoryCounts[cat]}</span>
-      </button></li>`);
+    tiles.push(`
+      <button class="cat-tile ${activeCategory===cat?'active':''}" style="--tile-color:${meta.color};--tile-bg:${meta.bg}" data-cat="${encodeURIComponent(cat)}">
+        <span class="cat-icon">${iconSvg(meta.icon)}</span>
+        <span class="cat-name">${cat}</span>
+        <span class="cat-count">${categoryCounts[cat]} artículos</span>
+      </button>`);
   });
-  catList.innerHTML = rows.join('');
-  catList.querySelectorAll('button').forEach(btn => {
+  catGrid.innerHTML = tiles.join('');
+  catGrid.querySelectorAll('.cat-tile').forEach(btn => {
     btn.addEventListener('click', () => {
       const cat = decodeURIComponent(btn.dataset.cat);
       activeCategory = cat === '' ? null : cat;
-      currentPage = 1;
-      renderCatTiles();
-      renderMobileCats();
-      renderGrid();
-    });
-  });
-
-  const chips = [
-    `<button class="${activeCategory===null?'active':''}" data-cat="">Todos</button>`
-  ];
-  categories.forEach(cat => {
-    chips.push(`<button class="${activeCategory===cat?'active':''}" data-cat="${encodeURIComponent(cat)}">${cat}</button>`);
-  });
-  mobileCats.innerHTML = chips.join('');
-  mobileCats.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const cat = decodeURIComponent(btn.dataset.cat);
-      activeCategory = cat === '' ? null : cat;
-      currentPage = 1;
       renderCatTiles();
       renderGrid();
     });
   });
 }
-function renderMobileCats(){ /* chips are rebuilt inside renderCatTiles */ }
 
 function escapeHtml(str){
   return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -852,49 +661,13 @@ function formatPrice(n){
   return n.toLocaleString('es-PE', {minimumFractionDigits:2, maximumFractionDigits:2});
 }
 
-function getFiltered(){
+function renderGrid(){
   const q = query.trim();
-  const list = PRODUCTS.filter(p => {
+  const filtered = PRODUCTS.filter(p => {
     const matchesCat = !activeCategory || p.categoria === activeCategory;
     const matchesQuery = !q || p.producto.toUpperCase().includes(q.toUpperCase());
     return matchesCat && matchesQuery;
   });
-  const sorted = list.slice();
-  if(sortMode === 'precio-asc') sorted.sort((a,b) => a.precio - b.precio);
-  else if(sortMode === 'precio-desc') sorted.sort((a,b) => b.precio - a.precio);
-  else if(sortMode === 'nombre-asc') sorted.sort((a,b) => a.producto.trim().localeCompare(b.producto.trim(), 'es'));
-  return sorted;
-}
-
-function renderPagination(totalItems){
-  const totalPages = Math.max(1, Math.ceil(totalItems / PAGE_SIZE));
-  if(currentPage > totalPages) currentPage = totalPages;
-  if(totalPages <= 1){ paginationEl.innerHTML = ''; return; }
-
-  const arrowLeft = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>';
-  const arrowRight = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
-
-  let html = `<button data-page="${currentPage-1}" ${currentPage===1?'disabled':''} aria-label="Página anterior">${arrowLeft}</button>`;
-  for(let i=1; i<=totalPages; i++){
-    html += `<button data-page="${i}" class="${i===currentPage?'active':''}">${i}</button>`;
-  }
-  html += `<button data-page="${currentPage+1}" ${currentPage===totalPages?'disabled':''} aria-label="Página siguiente">${arrowRight}</button>`;
-
-  paginationEl.innerHTML = html;
-  paginationEl.querySelectorAll('button[data-page]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const page = parseInt(btn.dataset.page, 10);
-      if(!page || page < 1) return;
-      currentPage = page;
-      renderGrid();
-      document.getElementById('catalogo').scrollIntoView({ behavior:'smooth', block:'start' });
-    });
-  });
-}
-
-function renderGrid(){
-  const q = query.trim();
-  const filtered = getFiltered();
 
   let metaHtml = `${filtered.length} producto${filtered.length === 1 ? '' : 's'} encontrado${filtered.length === 1 ? '' : 's'}`;
   if(activeCategory){
@@ -903,7 +676,7 @@ function renderGrid(){
   resultsCount.innerHTML = metaHtml;
   const removeBtn = document.getElementById('removeCatFilter');
   if(removeBtn){
-    removeBtn.addEventListener('click', () => { activeCategory = null; currentPage = 1; renderCatTiles(); renderGrid(); });
+    removeBtn.addEventListener('click', () => { activeCategory = null; renderCatTiles(); renderGrid(); });
   }
 
   if(filtered.length === 0){
@@ -911,47 +684,33 @@ function renderGrid(){
       <div class="big">Sin resultados</div>
       <p>No encontramos productos que coincidan con "${escapeHtml(q)}". Prueba con otro término o quita el filtro de categoría.</p>
     </div>`;
-    paginationEl.innerHTML = '';
     return;
   }
 
-  const start = (currentPage - 1) * PAGE_SIZE;
-  const pageItems = filtered.slice(start, start + PAGE_SIZE);
-
-  grid.innerHTML = pageItems.map(p => {
+  grid.innerHTML = filtered.map(p => {
     const brandMatch = p.producto.match(/(TRUPER|PRETUL)\s*$/i);
     const brand = brandMatch ? brandMatch[1].toUpperCase() : '';
-    const visual = getProductVisual(p);
-    const waText = encodeURIComponent(`Hola, quisiera cotizar: ${p.producto.trim()}`);
+    const meta = CATEGORY_META[p.categoria] || CATEGORY_META['Otros'];
+    const photoHtml = p.imagen ? `<div class="photo"><img src="${p.imagen}" alt="${escapeHtml(p.producto.trim())}" loading="lazy"></div>` : '';
     return `
-    <article class="card" style="--card-color:${visual.color};--card-bg:${visual.bg}">
-      <div class="card-image">
+    <article class="card" style="--card-color:${meta.color};--card-bg:${meta.bg}">
+      ${photoHtml}
+      <div class="top-row">
+        <span class="icon-badge">${iconSvg(meta.icon)}</span>
         <span class="tag">${escapeHtml(p.categoria)}</span>
-        ${iconSvg(visual.icon, visual.color)}
       </div>
-      <div class="card-body">
-        <div class="name">${highlight(p.producto.trim(), q)}</div>
-        <div class="brand-badge">${brand}</div>
-        <div class="price-row">
-          <span class="price"><span class="cur">S/</span>${formatPrice(p.precio)}</span>
-        </div>
-        <a class="quote-btn" href="https://wa.me/${WHATSAPP_NUMBER}?text=${waText}" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Cotizar por WhatsApp
-        </a>
+      <div class="name">${highlight(p.producto.trim(), q)}</div>
+      <div class="price-row">
+        <span class="price"><span class="cur">S/</span>${formatPrice(p.precio)}</span>
+        <span class="brand-badge">${brand}</span>
       </div>
     </article>`;
   }).join('');
-
-  renderPagination(filtered.length);
 }
 
-searchInput.addEventListener('input', (e) => { query = e.target.value; currentPage = 1; renderGrid(); });
-sortSelect.addEventListener('change', (e) => { sortMode = e.target.value; currentPage = 1; renderGrid(); });
-perPageSelect.addEventListener('change', (e) => { PAGE_SIZE = parseInt(e.target.value, 10); currentPage = 1; renderGrid(); });
+searchInput.addEventListener('input', (e) => { query = e.target.value; renderGrid(); });
 clearBtn.addEventListener('click', () => {
-  query = ''; activeCategory = null; currentPage = 1; sortMode = 'relevancia'; PAGE_SIZE = 16;
-  searchInput.value = ''; sortSelect.value = 'relevancia'; perPageSelect.value = '16';
+  query = ''; activeCategory = null; searchInput.value = '';
   renderCatTiles(); renderGrid();
 });
 
